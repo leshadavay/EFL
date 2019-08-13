@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E F L</title>
+    <link rel="stylesheet" type="text/css" href="css/menuNavigation.css">
+    <link rel="stylesheet" type="text/css" href="css/slidePage.css">
+    <link rel="stylesheet" type="text/css" href="css/bodySections.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum" rel="stylesheet"> <!--font-family: 'Forum', cursive;-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> <!--font-family: 'Ubuntu', sans-serif;-->
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"> <!--font-family: 'Julius Sans One', sans-serif;-->
+    <script type="text/javascript" src="scripts/login.js"></script>
+
+
+    <style>
+        body,html{
+            margin: 0;
+            padding: 0;
+        }
+        #top-animation{
+
+            width: 100%;
+            font-family:Rockwell;
+            color:#fbcb47;
+            text-align: center;
+            background-color: #222222;
+            background-size:cover;
+            padding:35px;
+            box-shadow:  0px 3px 20px 600px rgba(0,0,0,0.6);
+        }
+        .letter-1{
+            overflow:hidden;
+            font-weight:bolder;
+            font-size:40px;
+            animation-name: fadeInLeft;
+            animation-duration:10s;
+            animation-iteration-count:infinite;
+            margin-top:-20px;
+            color:#ffdc7a;
+        }
+
+        .letter-2{
+            overflow:hidden;
+            padding-bottom:30px;
+            font-weight:bolder;
+            font-size:40px;
+            animation-name:fadeInRight;
+            animation-iteration-count:infinite;
+            animation-duration: 10s;
+            color:#ffdc7a;
+        }
+
+        .letter-3{
+
+            overflow:hidden;
+            font-weight:bolder;
+            font-size:50px;
+            animation-name: zoomIn;
+            animation-duration:10s;
+            animation-delay:4s;
+            color:#7af2f6;
+            animation-iteration-count:infinite;
+            margin-top:-110px;
+            opacity:0;
+            font-family: 'Julius Sans One', sans-serif;
+        }
+
+        .letter-4{
+            padding-top:10px;
+            font-weight:bolder;
+            font-size:50px;
+            animation-name:flash;
+            animation-iteration-count:infinite;
+            animation-duration: 10s;
+            color:#e56a6a;
+            animation-fill-mode:forwards;
+            margin-top:-70px;
+            text-align:center;
+            opacity:0;
+            font-family: 'Julius Sans One', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="top-animation">
+        <div class="letter-1">E F L</div>
+        <div class="letter-2">English Free Learning</div>
+        <div class="letter-3">Try it for free</div>
+        <div class="letter-4">N O W !</div>
+    </div>
+    <header id="menu-bar">
+        <div class="navigation-bar">
+
+            <div class="efl" > <a href="index.html">e f l </a> </div>
+            <div id="administrator-mode"> </div>
+            <script>
+                if(typeof (Storage)!="undefined"){
+                    if(localStorage.getItem("userMode")=="A"){
+                        var printMode=document.getElementById("administrator-mode");
+
+                        printMode.innerHTML="Administrator mode";
+                    }
+                }
+            </script>
+            <nav>
+             <ul>
+
+                <li><a href="test_level.html" > check my english level</a></li>
+                <li><a href="listening.html" >listening </a></li>
+                <li><a href="ted.html"> ted</a></li>
+                <li><a href="quiz.html"> quiz</a></li>
+                <li> <script>
+                    if(localStorage.getItem("loginUser")===null){
+                        document.write("<a href='' onclick='errorLogin();'> open chat </a></li>");
+
+                    }
+                    else{
+                        document.write("<a href='open_chat.html'> open chat </a></li>");
+                    }
+                </script></li>
+                <li>
+                    <script>
+                        if(localStorage.getItem("loginUser")===null){
+                           document.write("<a href='' onclick='errorLogin();'> calendar </a></li>");
+
+                        }
+                        else{
+                        document.write("<a href='schedule.html'> calendar </a></li>");
+                        }
+                    </script>
+                <li><a href="about.html">about</a></li>
+                <li>
+                    <script>
+                        if(typeof (Storage)!=="undefined"){
+                            if(localStorage.getItem("loginUser")!=null){
+                            document.write('<a href="#" id="login-li" onclick="logOut();"  > logout </a></li>');
+                            }
+                            else{
+                           document.write('<a href="#" id="login-li" onmouseover="showLoginWindow();"  > login </a></li>');
+                            }
+                        }
+                    </script>
+
+                <li>  </li>
+        </ul>
+        </nav>
+        </div>
+    </header>
+
+    <div id="login-box" onmouseleave="hideLoginWindow();">
+        <table id="login-table">
+            <form id="login-form" action="javascript:submitLogin();">
+                <tr>
+                    <td>
+                        <textarea id="id" placeholder="Name" maxlength="8"></textarea>
+                       <!-- <input type="text" id="id" placeholder="Name" >-->
+                    </td>
+                    <td rowspan="2">
+                        <input type="submit" style="width:40px; height:70% ;margin-right: 20px" value="GO" >
+                    </td>
+                </tr>
+                <tr><td>
+                    <input type="password" id="password" placeholder="Password">
+                </td></tr>
+                <tr><td colspan="2"><br><label class="click-label"  onclick="showSigninWindow();"> Sign In</label><span style="color: #dedede"> &nbsp; &darr;</span></td></tr>
+            </form>
+        </table>
+
+    </div>
+    <div id="signin-box" onmouseleave="leaveSigninWindow();">
+        <table id="signin-table">
+            <form id="signin-form" action="javascript:submitSignin();">
+                <tr>
+                    <td>
+                        <input type="text" id="id-sign" placeholder="Name" >
+                    </td>
+                    <td rowspan="3">
+                        <input type="submit" style="width:40px; height:60% ;margin-right: 10px" value="GO" >
+                    </td>
+                </tr>
+                <tr><td>
+                    <input type="password" id="password-sign" placeholder="Password">
+                </td></tr>
+                <tr><td>
+                    <input type="password" id="password2-sign" placeholder="Password">
+                </td></tr>
+                <tr>
+                    <td colspan="2" style="text-align: left">
+                        <label><input class="user-mode" id="user-mode" type="radio"  name="user-mode" checked><span style="color: #dedede">User mode </span></label><br>
+                        <label><input class="user-mode" id="admin-mode" type="radio" name="user-mode" ><span style="color: #dedede">Administrator</span></label></td>
+                </tr>
+                <tr><td colspan="2"><br><label class="click-label"  onclick="showLoginWindow();return false;"> Log In </label><span style="color: #dedede"> &nbsp; &uarr;</span></td></tr>
+            </form>
+        </table>
+
+    </div>
+
+
+
+    <!-- page slider -->
+    <div id="slide-page-container">
+
+        <input type="radio" id="img-rad1" name="images"  checked/>
+        <input type="radio" id="img-rad2" name="images"/>
+        <input type="radio" id="img-rad3" name="images" />
+        <input type="radio" id="img-rad4" name="images" />
+
+
+        <div class="slide-images" id="slide-page1">
+            <img src="resources/images/slide1.jpg" alt="slide page1">
+            <label for="img-rad4" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad2" class="next"><span>&#x203a;</span></label>
+        </div>
+        <div class="slide-images" id="slide-page2">
+            <img src="resources/images/slide2.jpg" alt="slide page2">
+            <label for="img-rad1" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad3" class="next"><span>&#x203a;</span></label>
+        </div>
+        <div class="slide-images" id="slide-page3">
+            <img src="resources/images/slide3.jpg" alt="slide page3">
+            <label for="img-rad2" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad4" class="next"><span>&#x203a;</span></label>
+
+        </div>
+        <div class="slide-images" id="slide-page4">
+            <img src="resources/images/slide4.jpg" alt="slide page4">
+            <label for="img-rad3" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad1" class="next"><span>&#x203a;</span></label>
+        </div>
+
+        <!-- making bottom dots -->
+        <div id="slide-navigation">
+            <label for="img-rad1" class="dots" id="dot1" ></label>
+            <label for="img-rad2" class="dots" id="dot2" ></label>
+            <label for="img-rad3" class="dots" id="dot3" ></label>
+            <label for="img-rad4" class="dots" id="dot4" ></label>
+
+        </div>
+    </div>
+
+    <section>
+    <article>
+        <div id="main-article">
+        <div id="test-section">
+            <h3 class="h3">Check my English level</h3>
+            <p>What is your level of English ?<br>Let's check your current English level!
+                This test contains grammar and vocabulary questions and your test result will help
+            you choose a level to practise at. </p>
+            <a href="test_level.html" ><div id="go-page-test" class="a-div-button" >GO</div> </a>
+        </div>
+        <hr>
+        <div id="listening-section">
+            <h3 class="h3">Listening</h3>
+            <p> Listening to as much English as you can will help you
+                to improve your level of understanding and
+                you'll also improve your speaking and pronunciation.
+                Whether you need to improve your English listening skills for work,
+                for studying or to be able to communicate effectively with friends,
+                you'll find practical listening lessons and activities to help you.<br></p>
+            <a href="listening.html" ><div id="go-page-listening" class="a-div-button" >GO</div> </a>
+        </div>
+        <hr>
+        <div id="ted-section">
+            <h3 class="h3">Most popular TED talks</h3>
+            <div class="description">
+            <p>Learn English with TED Talks is a supplemental resource for
+                students enrolled in English language learning programs.
+                This video-based language learning app helps learners understand
+                and discuss powerful ideas from TED Talks. Check out 10 of TED's most viewed talks.
+            </p>
+            </div>
+            <a   href="ted.html" ><div id="go-page-ted" class="a-div-button" >GO</div> </a>
+        </div>
+        <hr>
+        <div id="quiz-section">
+            <h3 class="h3">Quiz</h3>
+            <div class="transparent">
+            <p>By completing "sentence completion" exercises you will enhance your understanding of
+                English grammar, improve your vocabulary. As you progress through each section,
+                these exercises gradually increase in difficulty.
+            </p>
+            </div>
+            <a   href="quiz.html" ><div id="go-page-quiz" class="a-div-button" >GO</div> </a>
+        </div>
+            <hr>
+        <div id="livechat-section">
+            <h3 class="h3">Live chat</h3>
+            <div class="transparent">
+                <p>Start real-time conversations with your web visitors,
+                    give some questions or answer their questions, practice and boost your English skills.
+                </p>
+            </div>
+            <a  href="open_chat.html" ><div id="go-page-livechat" class="a-div-button" >GO</div> </a>
+        </div>
+            <hr>
+        <div id="calendar-section">
+            <h3 class="h3">My schedule</h3>
+            <div class="transparent">
+                <p>By completing 'sentence completion' exercises you will enhance your understanding of
+                    English grammar, improve your vocabulary. As you progress through each section,
+                    these exercises gradually increase in difficulty.
+                </p>
+            </div>
+            <a  href="schedule.html" ><div id="go-page-schedule" class="a-div-button" >GO</div> </a>
+        </div>
+        </div>
+    </article>
+    </section>
+
+    <aside></aside>
+    <footer>
+        <div class="footer">
+            <p class="ft1">
+
+                © 2018 RAMIC All rights reserved
+            </p>
+            <p class="ft2">
+                Conact us: sangwoouz@naver.com
+            </p>
+            <p class="ft3">
+                Created by student of Catholic University of Korea
+            </p>
+            <p class="ft4">
+                Note: Any other use of the materials on this Website<br /> reproduction for purposes, distribution, republication, and display or<br /> performed without any permissions is strictly prohibited.
+                <br />
+                The author is currently researching on this website.
+            </p>
+
+
+        </div>
+    </footer>
+    <script>
+        window.onscroll = function() {myFunction()};
+
+        var header = document.getElementById("menu-bar");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>

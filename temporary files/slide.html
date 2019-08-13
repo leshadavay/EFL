@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+        #img-rad1,#img-rad2,#img-rad3,#img-rad4{
+            display: none;
+        }
+        .slide-page-container{
+            margin: 0 auto;
+            margin-top: 20px;
+            position: relative;
+            width: 70%;
+            height: 0;
+            padding-bottom: 38%;
+            user-select: none;
+            background: #4c4c4c;
+            border: solid 10px #2c2c2c;
+            border-radius:10px ;
+        }
+        .slide-images{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+        }
+        .slide-images img{
+            width: inherit;
+            height: inherit;
+        }
+
+        .previous, .next{
+            width: 12%;
+            height: inherit;
+            position: absolute;
+            top:0;
+            background: rgba(88,88,88,.4);
+            color:rgba(244, 244, 244,.9);
+            z-index: 99;
+            cursor: pointer;
+            text-align: center;
+        }
+        .previous{
+            left: 0;
+        }
+        .next{
+            right: 0;
+        }
+        .pre:hover, .next:hover{
+            transition: .3s;
+            background-color: rgba(88, 88, 89,.8);
+            color: #ffffff;
+        }
+        .slide-navigation{
+            width: 100%;
+            height: 11px;
+            bottom: 12%;
+            position: absolute;
+            text-align: center;
+            z-index: 99;
+        }
+        .dots {
+            top: -5px;
+            width: 18px;
+            height: 18px;
+            margin: 0 4px;
+
+            position: relative;
+            border-radius: 50%;
+            display: inline-block;
+            background: rgba(0,0,0,.6);
+        }
+        .dots:hover {
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: .25s
+        }
+        .slide-images{
+            z-index: -1;
+        }
+        #img-rad1:checked ~ #slide-page1  ,
+        #img-rad2:checked ~ #slide-page2  ,
+        #img-rad3:checked ~ #slide-page3,
+        #img-rad4:checked ~ #slide-page4
+
+        {z-index: 9; animation: scroll 1s ease-in-out;}
+        @keyframes scroll{
+            0%{	opacity:.4;}
+            100%{opacity:1;}
+        }
+    </style>
+</head>
+<body>
+<div class="slide-page-container">
+
+    <input type="radio" name="images" id="img-rad1" checked/>
+    <input type="radio" name="images" id="img-rad2"/>
+    <input type="radio" name="images" id="img-rad3"/>
+    <input type="radio" name="images" id="img-rad4"/>
+
+
+    <div class="slide-images" id="slide-page1">
+        <img src="../resources/images/1.jpg">
+        <label for="img-rad4" class="previous"></label>
+        <label for="img-rad2" class="next"></label>
+    </div>
+    <div class="slide-images" id="slide-page2">
+        <img src="../resources/images/2.jpg">
+        <label for="img-rad1" class="previous"></label>
+        <label for="img-rad3" class="next"></label>
+    </div>
+    <div class="slide-images" id="slide-page3">
+        <img src="../resources/images/3.jpg">
+        <label for="img-rad2" class="previous"></label>
+        <label for="img-rad4" class="next"></label>
+
+    </div>
+    <div class="slide-images" id="slide-page4">
+        <img src="../resources/images/4.jpg">
+        <label for="img-rad3" class="previous"></label>
+        <label for="img-rad1" class="next"></label>
+    </div>
+
+    <!-- making bottom dots -->
+    <div class="slide-navigation">
+        <label for="img-rad1" class="dots" id="dot1" ></label>
+        <label for="img-rad2" class="dots" id="dot2" ></label>
+        <label for="img-rad3" class="dots" id="dot3" ></label>
+        <label for="img-rad4" class="dots" id="dot4" ></label>
+
+    </div>
+</div>
+</body>
+</html>

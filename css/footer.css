@@ -1,0 +1,16 @@
+.footer {
+    background-color: rgba(0,0,0,0.9);
+    height: 250px;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: #bababa;
+    padding-top: 30px;
+    text-shadow:none !important;
+    font-weight:normal !important;
+}
+
+.ft4 {
+    padding-top: 20px;
+    color: #707070;
+    text-shadow:none !important;
+}

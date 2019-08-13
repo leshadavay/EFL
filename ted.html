@@ -1,0 +1,598 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="css/menuNavigation.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <script type="text/javascript" src="scripts/login.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet"> <!-- font-family: 'Noto Sans', sans-serif; -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum" rel="stylesheet"> <!--font-family: 'Forum', cursive;-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> <!--font-family: 'Ubuntu', sans-serif;-->
+
+    <style type="text/css">
+        body{
+            background-color:#eeeeee;
+            margin: 0;
+            padding: 0;
+        }
+        table{
+            border-bottom: 1px solid black;
+            width:1200px;
+            align-content:center;
+            margin-left:5%;
+            margin-right:5%;
+            padding:40px;
+        }
+        td{
+            padding:20px;
+            font-family: 'Montserrat', sans-serif;
+         
+        }
+        td p{
+            font-family: 'Noto Sans', sans-serif;
+            font-size:17px;
+        }
+       .title{
+        font-family: 'Montserrat', sans-serif;
+        background-color: rgb(26, 26, 26);
+        color:#eaeaea;
+        height:180px;
+        padding-top:20px;
+        margin-top:-14px;
+        }
+             /*нижняя часть страницы*/
+
+    </style>
+</head>
+<body>
+<header id="menu-bar">
+    <div class="navigation-bar">
+        <div class="efl" > <a href="index.html">e f l </a> </div>
+        <div id="administrator-mode">&nbsp;</div>
+        <script>
+            if(typeof (Storage)!="undefined"){
+                if(localStorage.getItem("userMode")=="A"){
+                    var printMode=document.getElementById("administrator-mode");
+
+                    printMode.innerHTML="Administrator mode";
+                }
+            }
+        </script>
+        <nav>
+            <ul>
+
+                <li><a href="test_level.html" > check my english level</a></li>
+                <li><a href="listening.html" >listening </a></li>
+                <li><a href="ted.html"> ted</a></li>
+                <li><a href="quiz.html"> quiz</a></li>
+                <li> <script>
+                    if(localStorage.getItem("loginUser")===null){
+                        document.write("<a href='' onclick='errorLogin();'> open chat </a></li>");
+
+                    }
+                    else{
+                        document.write("<a href='open_chat.html'> open chat </a></li>");
+                    }
+                </script></li>
+                <li>
+                    <script>
+                        if(localStorage.getItem("loginUser")===null){
+                            document.write("<a href='' onclick='errorLogin();'> calendar </a></li>");
+
+                        }
+                        else{
+                            document.write("<a href='schedule.html'> calendar </a></li>");
+                        }
+                    </script>
+                <li><a href="about.html">about</a></li>
+                <li>
+                    <script>
+                        if(typeof (Storage)!=="undefined"){
+                            if(localStorage.getItem("loginUser")!=null){
+                                document.write('<a href="#" id="login-li" onclick="logOut();"  > logout </a></li>');
+                            }
+                            else{
+                                document.write('<a href="#" id="login-li" onmouseover="showLoginWindow();"  > login </a></li>');
+                            }
+                        }
+                    </script>
+
+                <li>  </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div id="login-box" onmouseleave="hideLoginWindow();">
+    <table id="login-table">
+        <form id="login-form" action="javascript:submitLogin();">
+            <tr>
+                <td>
+                    <textarea id="id" placeholder="Name" maxlength="8"></textarea>
+                    <!-- <input type="text" id="id" placeholder="Name" >-->
+                </td>
+                <td rowspan="2">
+                    <input type="submit" style="width:40px; height:70% ;margin-right: 20px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password" placeholder="Password">
+            </td></tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showSigninWindow();"> Sign In</label><span style="color: #dedede"> &nbsp; &darr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+<div id="signin-box" onmouseleave="leaveSigninWindow();">
+    <table id="signin-table">
+        <form id="signin-form" action="javascript:submitSignin();">
+            <tr>
+                <td>
+                    <input type="text" id="id-sign" placeholder="Name" >
+                </td>
+                <td rowspan="3">
+                    <input type="submit" style="width:40px; height:60% ;margin-right: 10px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password-sign" placeholder="Password">
+            </td></tr>
+            <tr><td>
+                <input type="password" id="password2-sign" placeholder="Password">
+            </td></tr>
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    <label><input class="user-mode" id="user-mode" type="radio"  name="user-mode" checked><span style="color: #dedede">User mode </span></label><br>
+                    <label><input class="user-mode" id="admin-mode" type="radio" name="user-mode" ><span style="color: #dedede">Administrator</span></label></td>
+            </tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showLoginWindow();return false;"> Log In </label><span style="color: #dedede"> &nbsp; &uarr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+
+
+
+<div align="middle" class="title">
+        <h1>TED Conversations</h1>
+
+        <font class="texto2">
+            
+            There are the 15 most popular presentations on TED's website, <br />ranging from explorations of how to reimagine stress<br /> in your life to appreciating the power of introverts.
+        </font>
+
+
+    </div>
+    <!-- Slides -->
+
+
+
+
+        <!-- add the slide content to the slide html object -->
+    <div data-slide="20" id="no-1-sir-ken-robinson-says-that-schools-are-killing-our-creativity-20" class="slide-module clearfix vaop-breakpoint" >
+        <table class="t1">
+            <tr>
+                <td>
+
+
+                    <!-- add title if exists -->
+
+
+                    <div>
+                        <div><iframe src="//www.youtube.com/embed/iG9CE55wbtY?rel=0" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+
+                    <div style="float:right;">
+                        <div class="slide-title">
+                           
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <h3 class="slide-title">No. 1. Sir Ken Robinson says that schools are killing our creativity.</h3>
+                    <p><strong>Views:</strong> 38 million</p>
+                    <p>Sir Ken Robinson tops the list with his speech that calls into question our whole conception of education. As Robinson explains, we need to radically rethink our schools, encouraging and cultivating creativity and acknowledging the presence of multiple types of intelligence.</p>
+                    <p>Robinson believes that we are educating people out of their creativity. "If you're not prepared to be wrong, you'll never come up with anything original," Robinson says.</p>
+
+
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="19" id="no-2-amy-cuddy-explains-how-your-body-language-shapes-who-you-are-19" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t2">
+         
+            <tr>
+                <td>
+                    <div class="KonaFilter image-container slide-image">
+                        
+                        <div>
+                            <iframe src="https://www.youtube.com/embed/Ks-_Mh1QhMc" 
+                                    width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen">
+                            </iframe>
+                        </div>
+
+                    </div>
+                </td>
+                <td>
+                    <h3 class="slide-title">No. 2. Amy Cuddy explains how your body language shapes who you are.</h3>
+                    <p><strong>Views:</strong> 32 million</p>
+                    <p>Social psychologist Amy Cuddy details the scientific evidence behind power posing. Her research shows that the way you sit, stand, and hold yourself not only affects the way others perceive you, but changes your body chemistry.</p>
+                    <p>She explains how assuming a high-power pose, like standing with your feet spread and planting your hands on your hips, can increase your feelings of dominance and lower your stress.</p>
+                </td>
+           </tr>
+        </table>
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="18" id="no-3-simon-sinek-discusses-how-and-why-great-leaders-inspire-action-18" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t3">
+
+            <tr>
+                <td>
+              
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/qp0HIF3SfI4" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 3. Simon Sinek discusses how and why great leaders inspire action.</h3>
+                    <p><strong>Views:</strong> 26 million</p>
+                    <p>Simon Sinek has a simple question that he believes is the root of inspiration for all great people: Why?</p>
+                    <p>Sinek has spent his life's work trying to convince people to do what inspires them. "People don't buy what you do," he says. "People buy why you do it."</p>
+                </td>
+                </tr>
+            </table>
+
+    </div>
+
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="17" id="no-4-bren-brown-discusses-the-power-of-vulnerability-courage-authenticity-and-shame-17" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t4">
+
+            <tr>
+                <td>
+
+                    
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/iCvmsMzlF7o" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 4. Brené Brown discusses the power of vulnerability, courage, authenticity, and shame.</h3>
+                    <p><strong>Views:</strong> 24 million</p>
+                    <p>These four emotions and characteristics are things we come into contact with every day, and Brené Brown has spent the last 10 years studying them. In a speech filled with quotable material, her most poignant remark may be this: "You're imperfect, and you're wired for struggle, but you are worthy of love and belonging."</p>
+                </td>
+                </tr>
+            </table>
+    </div>
+
+   
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="16" id="no-5-jill-bolte-taylor-demonstrates-what-a-stroke-does-to-the-brain-16" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t5">
+
+            <tr>
+                <td>
+
+                    
+
+                    <div class="KonaFilter image-container slide-image">
+                        <div><iframe src="https://www.youtube.com/embed/UyyjU8fzEYU" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 5. Jill Bolte Taylor demonstrates what a stroke does to the brain.</h3>
+                    <p><strong>Views:</strong> 18 million</p>
+                    <p>Jill Bolte Taylor, a brain scientist, learned firsthand what a stroke does to the human mind when a blood vessel in her brain burst one morning.</p>
+                    <p>Witnessing her motion, speech, and self-awareness shut down one by one, Bolte spent the next eight years relearning how to think, walk, and talk. While the left side of her brain was permanently damaged, the right side experienced a windfall of creative energy. Today, she serves as a powerful voice for brain recovery.</p>
+                </td>
+                </tr>
+            </table>
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="15" id="no-6-mary-roach-reveals-some-surprising-science-about-sex-15" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t6">
+
+            <tr>
+                <td>
+               
+
+                    <div class="KonaFilter image-container slide-image">
+                        <div><iframe src="https://www.youtube.com/embed/7jx0dTYUO5E" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 6. Mary Roach reveals some surprising science about sex.</h3>
+                    <p><strong>Views:</strong> 18 million</p>
+                    <p>The topic isn't the only reason this talk is so popular — it's also the humor and wit of Mary Roach. She details her findings from hours of obscure research into the unknown and centuries-old topic of the orgasm. In the end, she gives viewers 10 bold and surprising claims about sexual climax. Viewer discretion is advised.</p>
+                </td>
+                </tr>
+            </table>
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="14" id="no-7-tony-robbins-says-that-an-invisible-force-is-what-motivates-us-to-act-14" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t7">
+
+            <tr>
+                <td>
+                    
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/Cpc-t-Uwv1I" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 7. Tony Robbins says that an "invisible force" is what motivates us to act.</h3>
+                    <p><strong>Views:</strong> 16 million</p>
+                    <p>One of the most famous motivational speakers in the world, Tony Robbins has held 10,000-seat seminars and spoken with Olympic athletes, heads of state, and CEOs.</p>
+                    <p>In this speech, which includes a famous TED moment in which he spontaneously high-fives with the spectating Al Gore, Robbins discusses what motivates us — something he calls the "invisible force."</p>
+                </td>
+                </tr>
+            </table>
+
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="13" id="no-8-dan-pink-delves-into-the-science-behind-motivation-13" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t8">
+
+            <tr>
+                <td>
+                   
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/rrkrvAUbU9Y" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 8. Dan Pink delves into the science behind motivation.</h3>
+                    <p><strong>Views:</strong> 15 million</p>
+                    <p>Previously a speech writer for Al Gore, Dan Pink is now a career analyst, studying the puzzle of motivation. He offers advice to managers who want to get the most out of their employees. First off, he tells them to forget the traditional forms of reward that, in the end, actually "dull thinking and block creativity."</p>
+                </td>
+                </tr>
+            </table>
+
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="12" id="no-9-pranav-mistry-takes-a-look-at-the-beginnings-of-wearable-technology-12" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t9">
+
+            <tr>
+                <td>
+                    
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/YrtANPtnhyg" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 9. Pranav Mistry takes a look at the beginnings of wearable technology.</h3>
+                    <p><strong>Views:</strong> 14 million</p>
+                    <p>Pranav Mistry's 2009 talk is an interesting look at wearable technology in its infancy.</p>
+                    <p>While the video has lost its ability to awe over the years, it remains a charming peek inside Mistry's mind at this time, since he would go on to become a Samsung executive responsible for breakthroughs in smartwatches.</p>
+                </td>
+                </tr>
+            </table>
+
+    </div>
+
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="11" id="no-10-cameron-russell-describes-what-its-like-to-be-a-supermodel-11" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t10">
+
+            <tr>
+                <td>
+                    
+
+                    <div class="KonaFilter image-container slide-image">
+                        <div><iframe src="https://www.youtube.com/embed/KM4Xe6Dlp0Y" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 10. Cameron Russell describes what it's like to be a supermodel.</h3>
+                    <p><strong>Views:</strong> 13 million</p>
+                    <p>The Victoria's Secret model knows that she "won a genetic lottery," but she also admits that she is insecure, since she has to think about what she looks like every day.</p>
+                    <p>"If you ever are wondering, 'If I have thinner thighs and shinier hair, will I be happier?' you just need to meet a group of models, because they have the thinnest thighs and the shiniest hair and the coolest clothes, and they're the most physically insecure women probably on the planet," she says.</p>
+
+                </td>
+                </tr>
+            </table>
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="10" id="no-11-susan-cain-describes-the-secret-power-of-introverts-10" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t11">
+
+            <tr>
+                <td>
+                    
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/c0KYU2j0TM4" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                        <td>
+                    <h3 class="slide-title">No. 11. Susan Cain describes the secret power of introverts.</h3>
+                    <p><strong>Views:</strong> 13 million</p>
+                    </td>
+                </tr>
+            </table>
+
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="9" id="no-12-shawn-achor-shares-the-happy-secret-to-better-work-9" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t12">
+
+            <tr>
+                <td>
+
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/fLJsdqxnZb0" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                </td>
+                <td>
+                    <h3 class="slide-title">No. 12. Shawn Achor shares the happy secret to better work.</h3>
+                    <p><strong>Views:</strong> 12 million</p>
+                    <p>Being happy at work isn't just a perk, argues psychologist Shawn Achor: Happiness fuels productivity.</p>
+                    <p>"If you can raise somebody's level of positivity in the present, then their brain experiences what we now call
+                </td>
+                </tr>
+            </table>
+
+</div>
+
+
+
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="8" id="no-13-pamela-meyer-reveals-how-to-spot-a-liar-8" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t13">
+
+            <tr>
+                <td>
+                    
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/P_6vDLq64gE" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 13. Pamela Meyer reveals how to spot a liar.</h3>
+                    <p><strong>Views:</strong> 12 million</p>
+                    <p>Liespotting author Pamela Meyer says we're facing an epidemic of dishonesty, when on any given day you may be lied to anywhere from 10 to 200 times.</p>
+                    <p>You can train yourself to spot the subtle cues of deception, she says, by listening for qualifying language ("to tell you the truth ...") and watching for uncharacteristic body language, like too much eye contact or a fake smile.</p>
+                </td>
+                </tr>
+            </table>
+    </div>
+
+
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="7" id="no-14-david-gallo-shares-the-mystery-behind-the-sea-creatures-of-the-deep-7" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t14">
+
+            <tr>
+                <td>
+                    
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/4lJ5gV6lInk" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 14. David Gallo shares the mystery behind the sea creatures of the deep.</h3>
+                    <p><strong>Views:</strong> 12 million</p>
+                    <p>A pioneer in ocean exploration, David Gallo provides us with a look at life miles below the ocean's surface. Included in the footage of his explorations are a cuttlefish that changes colors, a camouflaged, nearly invisible octopus, and a neon fish.</p>
+                    <p>"Today we've only explored about 3% of what's out there in the ocean," he tells the audience. "Already we've found the world's highest mountains, the world's deepest valleys, underwater lakes, underwater waterfalls ... There's still 97%, and either that 97% is empty or just full of surprises."</p>
+                </td>
+                </tr>
+            </table>
+
+    </div>
+
+    <!-- add the slide content to the slide html object -->
+    <div data-slide="6" id="no-15-dan-gilbert-reveals-the-science-behind-happiness-6" class="slide-module clearfix vaop-breakpoint">
+
+        <!-- add title if exists -->
+        <table class="t15">
+
+            <tr>
+                <td>
+                    
+
+                    <div class="KonaFilter image-container slide-image on-image">
+                        <div><iframe src="https://www.youtube.com/embed/4q1dgn_C0AU" width="470" height="300" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
+                    </div>
+                    </td>
+                <td>
+                    <h3 class="slide-title">No. 15. Dan Gilbert reveals the science behind happiness.</h3>
+                    <p><strong>Views:</strong> 12 million</p>
+                    <p>Harvard psychologist Dan Gilbert explains the fallacy behind the notion that to achieve happiness, people must get what they want. He uses psychology and neuroscience to explain that what we think makes us happy is, often, wrong.</p>
+                    <p>As Gilbert says, "Natural happiness is what we get when we get what we wanted, and synthetic happiness is what we make when we don't get what we wanted. In our society, we have a strong belief that synthetic happiness is of an inferior kind."</p>
+                </td>
+                </tr>
+            </table>
+
+    </div>
+    <div class="footer">
+        <p class="ft1">
+
+            © 2018 RAMIC All rights reserved
+        </p>
+        <p class="ft2">
+            Conact us: sangwoouz@naver.com
+        </p>
+        <p class="ft3">
+            Created by student of Catholic University of Korea
+        </p>
+        <p class="ft4">
+            Note: Any other use of the materials on this Website<br /> reproduction for purposes, distribution, republication, and display or<br /> performed without any permissions is strictly prohibited.
+            <br />
+            The author is currently researching on this website.
+        </p>
+
+
+    </div>
+    <!-- фиксировать вверний меню -->
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("menu-bar");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+
+</body>
+</html>

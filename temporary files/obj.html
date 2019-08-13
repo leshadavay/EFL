@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+
+        var account = new Object();
+        account.id="admin";
+        account.password="123";
+        account.eventDate;
+        account.eventDetails;
+        account.setEvent=setEvent;
+        account.removeEvent=removeEvent;
+        var accounts=[];
+        accounts.push(account);
+        document.write(accounts[0].id);
+    </script>
+</head>
+<body>
+   <script>
+       setEvent("2018 01 02","lunch at 12");
+   </script>
+</body>
+</html>

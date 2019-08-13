@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About</title>
+    <meta charset="utf-8" />
+
+      <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> <!--font-family: 'Ubuntu', sans-serif;-->
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"> <!--font-family: 'Orbitron', sans-serif;-->
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"> <!--font-family: 'Julius Sans One', sans-serif;-->  <link href="https://fonts.googleapis.com/css?family=Short+Stack" rel="stylesheet"> <!--font-family: 'Short Stack', cursive;-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <script type="text/javascript" src="scripts/login.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/menuNavigation.css">
+
+    <style type="text/css">
+
+        .animated_text {
+            height:400px;
+
+            text-align: center;
+            background: rgba(0,0,0,0.8);
+            background-size:cover;
+            padding:40px;
+            box-shadow:  0px 8px 16px 80px rgba(0,0,0,0.6);
+        }
+        #animate-container{
+            padding-top:150px;
+        }
+        .letter-1{
+            overflow:hidden;
+            font-weight:bolder;
+            font-size:70px;
+            animation-name: fadeInLeft;
+            animation-duration:17s;
+            animation-iteration-count:infinite;
+            margin-top:-40px;
+            background: linear-gradient(#eee, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .letter-2{
+            overflow:hidden;
+            padding-bottom:20px;
+            font-weight:bolder;
+            font-size:50px;
+            animation-name:fadeInRight;
+            animation-iteration-count:infinite;
+            animation-duration: 17s;
+            background: linear-gradient(#eee, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .letter-3{
+
+            overflow:hidden;
+            font-weight:bolder;
+            font-size:50px;
+            animation-name: zoomIn;
+            animation-duration:17s;
+            animation-delay:4s;
+            color:#7af2f6;
+            animation-iteration-count:infinite;
+            margin-top:-110px;
+            opacity:0;
+            font-family: 'Black Ops One', cursive;
+            background: linear-gradient(#ffa564, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .letter-4{
+            overflow:hidden;
+            font-weight:normal;
+            font-size:50px;
+            animation-name: zoomIn;
+            animation-duration:17s;
+            animation-delay:8.5s;
+            color:#7af2f6;
+            animation-iteration-count:infinite;
+            margin-top:-50px;
+            opacity:0;
+            font-family: 'Short Stack', cursive;
+            background: linear-gradient(#7af2f6, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+        }
+        .letter-5{
+
+            padding-top:10px;
+            font-weight:bolder;
+            font-size:80px;
+            animation-name:flash;
+            animation-iteration-count:infinite;
+            animation-duration: 17s;
+            color:#f66f6f;
+            animation-fill-mode:forwards;
+            margin-top:-90px;
+            text-align:center;
+            opacity:0;
+            font-family: 'Julius Sans One', sans-serif;
+        }
+        /*нижняя часть страницы*/
+        .footer {
+            background-color: rgba(0,0,0,0.9);
+            height: 250px;
+            text-align: center;
+            font-family: 'Ubuntu', sans-serif;
+            color: #bababa;
+            padding-top: 30px;
+        }
+
+        /*последная строка*/
+        .ft4 {
+            padding-top: 20px;
+            color: #707070;
+        }
+        body{
+            background-color:rgba(0,0,0,0.7);
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<header id="menu-bar">
+    <div class="navigation-bar">
+        <div class="efl" > <a href="index.html">e f l </a> </div>
+        <div id="administrator-mode">&nbsp;</div>
+        <script>
+            if(typeof (Storage)!="undefined"){
+                if(localStorage.getItem("userMode")=="A"){
+                    var printMode=document.getElementById("administrator-mode");
+
+                    printMode.innerHTML="Administrator mode";
+                }
+            }
+        </script>
+        <nav>
+            <ul>
+
+                <li><a href="test_level.html" > check my english level</a></li>
+                <li><a href="listening.html" >listening </a></li>
+                <li><a href="ted.html"> ted</a></li>
+                <li><a href="quiz.html"> quiz</a></li>
+                <li> <script>
+                    if(localStorage.getItem("loginUser")===null){
+                        document.write("<a href='' onclick='errorLogin();'> open chat </a></li>");
+
+                    }
+                    else{
+                        document.write("<a href='open_chat.html'> open chat </a></li>");
+                    }
+                </script></li>
+                <li>
+                    <script>
+                        if(localStorage.getItem("loginUser")===null){
+                            document.write("<a href='' onclick='errorLogin();'> calendar </a></li>");
+
+                        }
+                        else{
+                            document.write("<a href='schedule.html'> calendar </a></li>");
+                        }
+                    </script>
+                <li><a href="about.html">about</a></li>
+                <li>
+                    <script>
+                        if(typeof (Storage)!=="undefined"){
+                            if(localStorage.getItem("loginUser")!=null){
+                                document.write('<a href="#" id="login-li" onclick="logOut();"  > logout </a></li>');
+                            }
+                            else{
+                                document.write('<a href="#" id="login-li" onmouseover="showLoginWindow();"  > login </a></li>');
+                            }
+                        }
+                    </script>
+
+                <li>  </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="login-box" onmouseleave="hideLoginWindow();">
+    <table id="login-table">
+        <form id="login-form" action="javascript:submitLogin();">
+            <tr>
+                <td>
+                    <textarea id="id" placeholder="Name" maxlength="8"></textarea>
+                    <!-- <input type="text" id="id" placeholder="Name" >-->
+                </td>
+                <td rowspan="2">
+                    <input type="submit" style="width:40px; height:70% ;margin-right: 20px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password" placeholder="Password">
+            </td></tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showSigninWindow();"> Sign In</label><span style="color: #dedede"> &nbsp; &darr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+<div id="signin-box" onmouseleave="leaveSigninWindow();">
+    <table id="signin-table">
+        <form id="signin-form" action="javascript:submitSignin();">
+            <tr>
+                <td>
+                    <input type="text" id="id-sign" placeholder="Name" >
+                </td>
+                <td rowspan="3">
+                    <input type="submit" style="width:40px; height:60% ;margin-right: 10px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password-sign" placeholder="Password">
+            </td></tr>
+            <tr><td>
+                <input type="password" id="password2-sign" placeholder="Password">
+            </td></tr>
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    <label><input class="user-mode" id="user-mode" type="radio"  name="user-mode" checked><span style="color: #dedede">User mode </span></label><br>
+                    <label><input class="user-mode" id="admin-mode" type="radio" name="user-mode" ><span style="color: #dedede">Administrator</span></label></td>
+            </tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showLoginWindow();return false;"> Log In </label><span style="color: #dedede"> &nbsp; &uarr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+<section class="animated_text">
+    <div id="animate-container">
+        <div class="letter-1">201521641</div>
+        <div class="letter-2">Abdulaziz</div>
+        <div class="letter-3">Thank you for visiting!</div>
+        <div class="letter-4">Contact:  sangwoouz@naver.com</div>
+        <div class="letter-5">Good Luck!</div>
+    </div>
+</section>
+<footer>
+<div class="footer">
+    <p class="ft1">
+
+        © 2018 RAMIC All rights reserved
+    </p>
+    <p class="ft2">
+        Conact us: sangwoouz@naver.com
+    </p>
+    <p class="ft3">
+        Created by student of Catholic University of Korea
+    </p>
+    <p class="ft4">
+        Note: Any other use of the materials on this Website<br /> reproduction for purposes, distribution, republication, and display or<br /> performed without any permissions is strictly prohibited.
+        <br />
+        The author is currently researching on this website.
+    </p>
+
+
+</div>
+</footer>
+<!-- фиксировать вверний меню -->
+<script>
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Open Chat v1.0</title>
+
+    <link rel="stylesheet" type="text/css" href="css/menuNavigation.css">
+
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum" rel="stylesheet"> <!--font-family: 'Forum', cursive;-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> <!--font-family: 'Ubuntu', sans-serif;-->
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"> <!--font-family: 'Julius Sans One', sans-serif;-->
+    <script type="text/javascript" src="scripts/login.js"></script>
+    <script>
+        if(localStorage.getItem("loginUser")===null){
+            alert("Please login first");
+            window.location.replace("index.html");
+        }
+        function saveMessage() {
+
+            var msg=document.getElementById("input-msg").value;
+            var form=document.getElementById("send-msg-form");
+
+            form.reset();
+
+            if(msg.length>0){
+                if(typeof (Storage)!="undefined"){
+                    var userID=localStorage.getItem("loginUser");
+                    if(localStorage.getItem("loginUser")!==null){
+                        if(localStorage.getItem("userMsg")==null){
+
+                            localStorage.setItem("userMsg",userID+"|"+msg+"||");
+                        }
+                        else{
+                            var oldMsg=localStorage.getItem("userMsg");
+                            localStorage.setItem("userMsg",oldMsg+userID+"|"+msg+"||");
+                        }
+
+                        var print=document.getElementById("msg-container");
+                        print.innerHTML+="<div id='all-msg-box' ><div class='sender-profile'></div><p class='sender-id'>"+userID+"</p><div id='sender-msg-box'> <p class='messages'>"+msg+"</p></div></div>";
+
+
+                    }
+                    else {
+                        alert("Please login first");
+                    }
+                }
+                else{
+                    alert("Error on local storage");
+                }
+            }
+        }
+        function fetchMessages(){
+
+            if(typeof (Storage)!="undefined"){
+
+                if(localStorage.getItem("loginUser")!==null){
+
+                    if(localStorage.getItem("userMsg")!==null){
+                        var tmp=localStorage.getItem("userMsg");
+                        var print=document.getElementById("msg-container");
+
+                        var allMessages=tmp.split("||");
+                        for(var i=0;i<allMessages.length;i++){
+                            var eachMessages=allMessages[i].split("|");
+                            if(eachMessages!=""){
+                                print.innerHTML+="<div id='all-msg-box'><div class='sender-profile'></div><p class='sender-id'>"+eachMessages[0]+"</p><div id='sender-msg-box'> <p class='messages'>"+eachMessages[1]+"</p></div></div>";
+
+                            }
+
+
+                        }
+
+
+                    }
+                }
+                else {
+                    alert("Please login first");
+                }
+            }
+            else{
+                alert("Error on local storage");
+            }
+        }
+    </script>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        #chat-container{
+            width: 99%;
+            height:90%;
+            position: absolute;
+
+        }
+        #chat-box{
+            margin-top: 5px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 55%;
+            height:88%;
+            border: 4px solid #343434;
+            box-shadow: 0 0 5px 1px black;
+            border-radius: 10px;
+            overflow: scroll;
+            text-align: center;
+
+        }
+        #chat-container form{
+            width: 50%;
+
+            text-align: center;
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: auto;
+            right:auto;
+            bottom: 1%;
+        }
+        #send-msg-form div{
+            position: relative;
+        }
+
+        #chat-container input[type="submit"]{
+            border-color: black;
+            background-color: #37000b;
+            color: #e8e8e8;
+            border-radius: 5px ;
+            height: 40px;
+            bottom: 0px;
+            right: 21%;
+            position: absolute;
+        }
+        #chat-container textarea{
+            position: absolute;
+            font-size: 15px;
+            bottom: 0px;
+            left:21%;
+            width: 50%;
+            height: 33px;
+
+            resize: none;
+        }
+        #msg-container{
+            height: 90%;
+
+        }
+        #all-msg-box{
+            position: relative;
+            display: inline-block;
+            width: 95%;
+            height: 80px;
+
+            text-align: left;
+        }
+
+        .sender-profile{
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height:50px;
+
+            background: url("resources/icons/default_user_profile.png") no-repeat center center / cover;
+        }
+        #sender-msg-box{
+            position: absolute;
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 20px;
+            padding-left: 15px;
+            padding-right: 50px;
+            background-color: lightskyblue;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 20px;
+        }
+        .sender-id{
+            width: 50px;
+            position: absolute;
+            text-align: center;
+            top:30px;
+            font: normal bold 14px "Malgun Gothic", sans-serif;
+
+        }
+        .messages{
+            font-family: Consolas;
+            font-size: 14px;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+<header id="menu-bar">
+    <div class="navigation-bar">
+
+        <div class="efl" > <a href="index.html">e f l </a> </div>
+        <div id="administrator-mode"> </div>
+        <script>
+            if(typeof (Storage)!="undefined"){
+                if(localStorage.getItem("userMode")=="A"){
+                    var printMode=document.getElementById("administrator-mode");
+
+
+                    printMode.innerHTML="Administrator mode";
+                }
+            }
+        </script>
+        <nav>
+            <ul>
+
+                <li><a href="test_level.html" > check my english level</a></li>
+                <li><a href="listening.html" >listening </a></li>
+                <li><a href="ted.html"> ted</a></li>
+                <li><a href="quiz.html"> quiz</a></li>
+                <li> <script>
+                    if(localStorage.getItem("loginUser")===null){
+                        document.write("<a href='' onclick='errorLogin();'> open chat </a></li>");
+
+                    }
+                    else{
+                        document.write("<a href='open_chat.html'> open chat </a></li>");
+                    }
+                </script></li>
+                <li>
+                    <script>
+                        if(localStorage.getItem("loginUser")===null){
+                            document.write("<a href='' onclick='errorLogin();'> calendar </a></li>");
+
+                        }
+                        else{
+                            document.write("<a href='schedule.html'> calendar </a></li>");
+                        }
+                    </script>
+                <li><a href="about.html">about</a></li>
+                <li>
+                    <script>
+                        if(typeof (Storage)!=="undefined"){
+                            if(localStorage.getItem("loginUser")!=null){
+                                document.write('<a href="#" id="login-li" onclick="logOut();"  > logout </a></li>');
+                            }
+                            else{
+                                document.write('<a href="#" id="login-li" onmouseover="showLoginWindow();"  > login </a></li>');
+                            }
+                        }
+                    </script>
+
+                <li>  </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="login-box" onmouseleave="hideLoginWindow();">
+    <table id="login-table">
+        <form id="login-form" action="javascript:submitLogin();">
+            <tr>
+                <td>
+                    <textarea id="id" placeholder="Name" maxlength="8"></textarea>
+                    <!-- <input type="text" id="id" placeholder="Name" >-->
+                </td>
+                <td rowspan="2">
+                    <input type="submit" style="width:40px; height:70% ;margin-right: 20px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password" placeholder="Password">
+            </td></tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showSigninWindow();"> Sign In</label><span style="color: #dedede"> &nbsp; &darr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+<div id="signin-box" onmouseleave="leaveSigninWindow();">
+    <table id="signin-table">
+        <form id="signin-form" action="javascript:submitSignin();">
+            <tr>
+                <td>
+                    <input type="text" id="id-sign" placeholder="Name" >
+                </td>
+                <td rowspan="3">
+                    <input type="submit" style="width:40px; height:60% ;margin-right: 10px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password-sign" placeholder="Password">
+            </td></tr>
+            <tr><td>
+                <input type="password" id="password2-sign" placeholder="Password">
+            </td></tr>
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    <label><input class="user-mode" id="user-mode" type="radio"  name="user-mode" checked><span style="color: #dedede">User mode </span></label><br>
+                    <label><input class="user-mode" id="admin-mode" type="radio" name="user-mode" ><span style="color: #dedede">Administrator</span></label></td>
+            </tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showLoginWindow();return false;"> Log In </label><span style="color: #dedede"> &nbsp; &uarr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+<div id="chat-container">
+
+    <div id="chat-box">
+
+        <div id="msg-container">
+
+            <p id="user-id"></p>
+            <p id="user-msg"></p>
+        </div>
+        <form id="send-msg-form" action="javascript:saveMessage();">
+
+            <textarea id="input-msg" maxlength="120"></textarea>
+            <input type="submit" id="send-msg" value="send">
+
+        </form>
+        <script>
+            document.getElementById("input-msg").focus();
+            fetchMessages();
+        </script>
+    </div>
+</div>
+
+
+</body>
+</html>

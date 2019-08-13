@@ -1,0 +1,2202 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="css/menuNavigation.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <script type="text/javascript" src="scripts/login.js"></script>
+    <script type="text/javascript" src="scripts/testResult.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet"> <!-- font-family: 'Noto Sans', sans-serif; -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum" rel="stylesheet"> <!--font-family: 'Forum', cursive;-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> <!--font-family: 'Ubuntu', sans-serif;-->
+    <style type="text/css">
+        body{
+           background-color:#b7dee8;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .title{
+        font-family: 'Ubuntu', sans-serif;
+        background-color: rgba(0,0,0,0.9);
+        color:#eaeaea;
+        height:180px;
+        padding-top:20px;
+        }
+        td{
+            font-family: 'Ubuntu', sans-serif;
+        }
+        table{
+            padding: 30px;
+            width:600px;
+            border-bottom: 1px solid black;
+            background-color: #f5f5f5;
+
+        }
+        td{
+             padding: 5px;
+        }
+        #level-info{
+
+            font-family: 'Ubuntu', sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            background-color: #85c5c0;
+            border: 2px solid black;
+        }
+        #level-info thead th{
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<header id="menu-bar">
+    <div class="navigation-bar">
+        <div class="efl" > <a href="index.html">e f l </a> </div>
+        <div id="administrator-mode">&nbsp;</div>
+        <script>
+            if(typeof (Storage)!="undefined"){
+                if(localStorage.getItem("userMode")=="A"){
+                    var printMode=document.getElementById("administrator-mode");
+
+                    printMode.innerHTML="Administrator mode";
+                }
+            }
+        </script>
+        <nav>
+            <ul>
+
+                <li><a href="test_level.html" > check my english level</a></li>
+                <li><a href="listening.html" >listening </a></li>
+                <li><a href="ted.html"> ted</a></li>
+                <li><a href="quiz.html"> quiz</a></li>
+                <li> <script>
+                    if(localStorage.getItem("loginUser")===null){
+                        document.write("<a href='' onclick='errorLogin();'> open chat </a></li>");
+
+                    }
+                    else{
+                        document.write("<a href='open_chat.html'> open chat </a></li>");
+                    }
+                </script></li>
+                <li>
+                    <script>
+                        if(localStorage.getItem("loginUser")===null){
+                            document.write("<a href='' onclick='errorLogin();'> calendar </a></li>");
+
+                        }
+                        else{
+                            document.write("<a href='schedule.html'> calendar </a></li>");
+                        }
+                    </script>
+                <li><a href="about.html">about</a></li>
+                <li>
+                    <script>
+                        if(typeof (Storage)!=="undefined"){
+                            if(localStorage.getItem("loginUser")!=null){
+                                document.write('<a href="#" id="login-li" onclick="logOut();"  > logout </a></li>');
+                            }
+                            else{
+                                document.write('<a href="#" id="login-li" onmouseover="showLoginWindow();"  > login </a></li>');
+                            }
+                        }
+                    </script>
+
+                <li>  </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div id="login-box" onmouseleave="hideLoginWindow();">
+    <table id="login-table">
+        <form id="login-form" action="javascript:submitLogin();">
+            <tr>
+                <td>
+                    <textarea id="id" placeholder="Name" maxlength="8"></textarea>
+                    <!-- <input type="text" id="id" placeholder="Name" >-->
+                </td>
+                <td rowspan="2">
+                    <input type="submit" style="width:40px; height:70% ;margin-right: 20px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password" placeholder="Password">
+            </td></tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showSigninWindow();"> Sign In</label><span style="color: #dedede"> &nbsp; &darr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+<div id="signin-box" onmouseleave="leaveSigninWindow();">
+    <table id="signin-table">
+        <form id="signin-form" action="javascript:submitSignin();">
+            <tr>
+                <td>
+                    <input type="text" id="id-sign" placeholder="Name" >
+                </td>
+                <td rowspan="3">
+                    <input type="submit" style="width:40px; height:60% ;margin-right: 10px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password-sign" placeholder="Password">
+            </td></tr>
+            <tr><td>
+                <input type="password" id="password2-sign" placeholder="Password">
+            </td></tr>
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    <label><input class="user-mode" id="user-mode" type="radio" class="answers"  name="user-mode" checked><span style="color: #dedede">User mode </span></label><br>
+                    <label><input class="user-mode" id="admin-mode" type="radio" class="answers" name="user-mode" ><span style="color: #dedede">Administrator</span></label></td>
+            </tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showLoginWindow();return false;"> Log In </label><span style="color: #dedede"> &nbsp; &uarr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+
+<div align="middle" class="title">
+        <h1>English Level Test</h1>
+
+        <span>
+            Please choose one option for each question then click
+            <br>
+            'Test Result' to obtain your result and level
+            <br>
+            (50 questions)
+            <br>
+            <br>
+        </span>
+
+
+</div>
+<div class="main">
+
+            <center>
+                <table id="level-info" border="1" cellpadding="5" cellspacing="5">
+                    <thead>
+                    <tr><th colspan="6">This is a series of quick tests that will give you a rough idea of your level of English on a scale of 0 to 5.</th></tr>
+                    </thead>
+                    <tbody>
+
+                    <tr align="center">
+
+                        <th>Level</th>
+
+                        <th>Description</th>
+
+                        <td><b>CEFR</b></td>
+
+                        <th>Cambridge ESOL</th>
+
+                        <th>IELTS </th>
+
+                        <th><p>TOEFL<br>
+                            Paper/Computer/Internet</p></th>
+
+                    </tr>
+
+                    <tr align="center">
+
+                        <td>Level 0</td>
+
+                        <td>No knowledge of English</td>
+
+                        <td>&nbsp;</td>
+
+                        <td>&nbsp;</td>
+
+                        <td>&nbsp;</td>
+
+                        <td>&nbsp;</td>
+
+                    </tr>
+
+                    <tr align="center">
+
+                        <td>Level 1</td>
+
+                        <td>Elementary level of English</td>
+
+                        <td>A2</td>
+
+                        <td>KET</td>
+
+                        <td>3.0</td>
+
+                        <td>400/97/32</td>
+
+                    </tr>
+
+                    <tr align="center">
+
+                        <td>Level 2</td>
+
+                        <td>Low intermediate level of English</td>
+
+                        <td>B1</td>
+
+                        <td>PET</td>
+
+                        <td>4.0</td>
+
+                        <td>450/133/45</td>
+
+                    </tr>
+
+                    <tr align="center">
+
+                        <td>Level 3</td>
+
+                        <td>High intermediate level of English</td>
+
+                        <td>B2</td>
+
+                        <td>FCE</td>
+
+                        <td>5.0</td>
+
+                        <td>500/173/61</td>
+
+                    </tr>
+
+                    <tr align="center">
+
+                        <td>Level 4</td>
+
+                        <td>Advanced level of English</td>
+
+                        <td>C1</td>
+
+                        <td>CAE</td>
+
+                        <td>6.0</td>
+
+                        <td>550/213/80</td>
+
+                    </tr>
+
+                    <tr align="center">
+
+                        <td>Level 5</td>
+
+                        <td>Proficient in English</td>
+
+                        <td>C2</td>
+
+                        <td>CPE</td>
+
+                        <td>7.0</td>
+
+                        <td>600/250/100</td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </center>
+            <center>
+                <table>
+            <tbody>
+                <tr >
+
+                    <td>
+                            <b>
+                                1. How old are you?
+                            </b>
+                        </td>
+                </tr>
+
+
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg0" >&nbsp;<span><b>A.</b></span>&nbsp;<span>I have 27 years old</span>
+                    </td>
+
+                   <td>
+                        <input type="radio" class="answers" name="preg0" >&nbsp;<span><b>B.</b></span>&nbsp;<span>I have 27 years</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg0" >&nbsp;<span><b>C.</b></span>&nbsp;<span>I am fine</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg0">&nbsp;<span ><b>D.</b></span>&nbsp;<span >I am 27 years old</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                2. He went to the Stadium .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg2" >&nbsp;<span><b>A.</b></span>&nbsp;<span>with taxi</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg2" >&nbsp;<span class="correct-answer"><b>B.</b></span>&nbsp;<span>by taxi</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg2" >&nbsp;<span><b>C.</b></span>&nbsp;<span>on taxi</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg2">&nbsp;<span><b>D.</b></span>&nbsp;<span>in taxi</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                3. How long have you been living in London?
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg3" >&nbsp;<span class="correct-answer"><b>A.</b></span>&nbsp;<span>for 7 years</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg3" >&nbsp;<span><b>B.</b></span>&nbsp;<span>at least 7 years</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg3" >&nbsp;<span><b>C.</b></span>&nbsp;<span>since 7 years</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg3">&nbsp;<span><b>D.</b></span>&nbsp;<span>7 years ago</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                4. We haven't got ..... money.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg4" >&nbsp;<span><b>A.</b></span>&nbsp;<span>a lot</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg4" >&nbsp;<span><b>B.</b></span>&nbsp;<span>some</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg4" >&nbsp;<span><b>C.</b></span>&nbsp;<span>any</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg4">&nbsp;<span><b>D.</b></span>&nbsp;<span>many</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                5. Choose the correct sentence:
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg6" >&nbsp;<span><b>A.</b></span>&nbsp;<span>He like going to the movies</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg6" >&nbsp;<span><b>B.</b></span>&nbsp;<span>He likes going to the movies</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg6" >&nbsp;<span><b>C.</b></span>&nbsp;<span>He liked go to the movies</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg6">&nbsp;<span><b>D.</b></span>&nbsp;<span>He like the movies</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                6. Peter ..... fly to San Francisco tomorrow.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg7" >&nbsp;<span><b>A.</b></span>&nbsp;<span>to going</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg7" >&nbsp;<span><b>B.</b></span>&nbsp;<span>goes to</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg7" >&nbsp;<span><b>C.</b></span>&nbsp;<span>is going to</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg7">&nbsp;<span><b>D.</b></span>&nbsp;<span>go to</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                7. He plays soccer .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg8" >&nbsp;<span><b>A.</b></span>&nbsp;<span>on Wednesdays</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg8" >&nbsp;<span><b>B.</b></span>&nbsp;<span>in Wednesdays</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg8" >&nbsp;<span><b>C.</b></span>&nbsp;<span>at Wednesdays</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg8">&nbsp;<span><b>D.</b></span>&nbsp;<span>by Wednesdays</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                8. .... some more coffee?
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg9" >&nbsp;<span><b>A.</b></span>&nbsp;<span>Do you?</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg9" >&nbsp;<span><b>B.</b></span>&nbsp;<span>Do you like?</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg9" >&nbsp;<span><b>C.</b></span>&nbsp;<span>You'd like</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg9">&nbsp;<span><b>D.</b></span>&nbsp;<span>Would you like?</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                9. I wanted a green shirt but they only had .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg10" >&nbsp;<span><b>A.</b></span>&nbsp;<span>a one white</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg10" >&nbsp;<span><b>B.</b></span>&nbsp;<span>one white</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg10" >&nbsp;<span><b>C.</b></span>&nbsp;<span>a white</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg10">&nbsp;<span><b>D.</b></span>&nbsp;<span>a white one</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                10. He ..... never been to America.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg11" >&nbsp;<span><b>A.</b></span>&nbsp;<span>does</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg11" >&nbsp;<span><b>B.</b></span>&nbsp;<span>has</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg11" >&nbsp;<span><b>C.</b></span>&nbsp;<span>haven't</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg11">&nbsp;<span><b>D.</b></span>&nbsp;<span>hadn't</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                11. Choose the correct sentence:
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg13" >&nbsp;<span><b>A.</b></span>&nbsp;<span>Richard usually arrives late</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg13" >&nbsp;<span><b>B.</b></span>&nbsp;<span>Richard late arrives usually</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg13" >&nbsp;<span><b>C.</b></span>&nbsp;<span>Richard late usually arrives</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg13">&nbsp;<span><b>D.</b></span>&nbsp;<span>Richard usually late arrives</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                12. The house was empty. There ..... there.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg15" >&nbsp;<span><b>A.</b></span>&nbsp;<span>wasn't nobody</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg15" >&nbsp;<span><b>B.</b></span>&nbsp;<span>was anybody</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg15" >&nbsp;<span><b>C.</b></span>&nbsp;<span>was somebody</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg15">&nbsp;<span><b>D.</b></span>&nbsp;<span>was nobody</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                13. If I were rich, I ..... buy a house on the beach.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg16" >&nbsp;<span><b>A.</b></span>&nbsp;<span>will</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg16" >&nbsp;<span><b>B.</b></span>&nbsp;<span>would</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg16" >&nbsp;<span><b>C.</b></span>&nbsp;<span>should</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg16">&nbsp;<span><b>D.</b></span>&nbsp;<span>wish</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                14. When she arrived, he .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg17" >&nbsp;<span><b>A.</b></span>&nbsp;<span>already left</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg17" >&nbsp;<span><b>B.</b></span>&nbsp;<span>has already left</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg17" >&nbsp;<span><b>C.</b></span>&nbsp;<span>had already left</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg17">&nbsp;<span><b>D.</b></span>&nbsp;<span>left</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                15. I forgot ..... the lights before I left.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg19" >&nbsp;<span><b>A.</b></span>&nbsp;<span>to turn off</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg19" >&nbsp;<span><b>B.</b></span>&nbsp;<span>put off</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg19" >&nbsp;<span><b>C.</b></span>&nbsp;<span>turning off</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg19">&nbsp;<span><b>D.</b></span>&nbsp;<span>shot</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                16. By the time you finish the class I .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg20" >&nbsp;<span><b>A.</b></span>&nbsp;<span>will have left</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg20" >&nbsp;<span><b>B.</b></span>&nbsp;<span>leave</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg20" >&nbsp;<span><b>C.</b></span>&nbsp;<span>going to leave</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg20">&nbsp;<span><b>D.</b></span>&nbsp;<span>would left</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                17. The room can't be dirty she .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg21" >&nbsp;<span><b>A.</b></span>&nbsp;<span>is just clean it.</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg21" >&nbsp;<span><b>B.</b></span>&nbsp;<span>have just cleaned it.</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg21" >&nbsp;<span><b>C.</b></span>&nbsp;<span>just clean it.</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg21">&nbsp;<span><b>D.</b></span>&nbsp;<span>has just cleaned it.</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                18. He plays soccer, ..... ?
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg24" >&nbsp;<span><b>A.</b></span>&nbsp;<span>don't he?</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg24" >&nbsp;<span><b>B.</b></span>&nbsp;<span>does he?</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg24" >&nbsp;<span><b>C.</b></span>&nbsp;<span>isn't he?</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg24">&nbsp;<span><b>D.</b></span>&nbsp;<span>doesn't he?</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                19. If only I ..... to the party instead of staying at home.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg25" >&nbsp;<span><b>A.</b></span>&nbsp;<span>went</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg25" >&nbsp;<span><b>B.</b></span>&nbsp;<span>had gone</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg25" >&nbsp;<span><b>C.</b></span>&nbsp;<span>did go</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg25">&nbsp;<span><b>D.</b></span>&nbsp;<span>have gone</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                20. Has Mrs. Smith arrived ..... ?
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg28" >&nbsp;<span><b>A.</b></span>&nbsp;<span>yet</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg28" >&nbsp;<span><b>B.</b></span>&nbsp;<span>still</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg28" >&nbsp;<span><b>C.</b></span>&nbsp;<span>now</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg28">&nbsp;<span><b>D.</b></span>&nbsp;<span>already</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                21. Wendy is ..... Paul to get up now.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg29" >&nbsp;<span><b>A.</b></span>&nbsp;<span>telling</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg29" >&nbsp;<span><b>B.</b></span>&nbsp;<span>saying</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg29" >&nbsp;<span><b>C.</b></span>&nbsp;<span>saying to</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg29">&nbsp;<span><b>D.</b></span>&nbsp;<span>telling to</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                22. Have you sent that letter to Mr. Taylor?
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes, I've ..... done that.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg30" >&nbsp;<span><b>A.</b></span>&nbsp;<span>still</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg30" >&nbsp;<span><b>B.</b></span>&nbsp;<span>yet</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg30" >&nbsp;<span><b>C.</b></span>&nbsp;<span>already</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg30">&nbsp;<span><b>D.</b></span>&nbsp;<span>now</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                23. It's no use ..... to him. He doesn't listen.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg31" >&nbsp;<span><b>A.</b></span>&nbsp;<span>speaking</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg31" >&nbsp;<span><b>B.</b></span>&nbsp;<span>to speak</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg31" >&nbsp;<span><b>C.</b></span>&nbsp;<span>spoke</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg31">&nbsp;<span><b>D.</b></span>&nbsp;<span>have spoken</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                24. This is the girl ..... I met on Thursday.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg34" >&nbsp;<span><b>A.</b></span>&nbsp;<span>whom</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg34" >&nbsp;<span><b>B.</b></span>&nbsp;<span>which</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg34" >&nbsp;<span><b>C.</b></span>&nbsp;<span>what</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg34">&nbsp;<span><b>D.</b></span>&nbsp;<span>-----</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                25. ..... is your house from here?
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg35" >&nbsp;<span><b>A.</b></span>&nbsp;<span>How much</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg35" >&nbsp;<span><b>B.</b></span>&nbsp;<span>How long</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg35" >&nbsp;<span><b>C.</b></span>&nbsp;<span>How far</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg35">&nbsp;<span><b>D.</b></span>&nbsp;<span>How many</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                26. You can watch TV ..... you like.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg36" >&nbsp;<span><b>A.</b></span>&nbsp;<span>whenever</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg36" >&nbsp;<span><b>B.</b></span>&nbsp;<span>soon</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg36" >&nbsp;<span><b>C.</b></span>&nbsp;<span>always</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg36">&nbsp;<span><b>D.</b></span>&nbsp;<span>whatever</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                27. This house is quite old. It ..... in 1910.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg38" >&nbsp;<span><b>A.</b></span>&nbsp;<span>built</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg38" >&nbsp;<span><b>B.</b></span>&nbsp;<span>was built</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg38" >&nbsp;<span><b>C.</b></span>&nbsp;<span>build</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg38">&nbsp;<span><b>D.</b></span>&nbsp;<span>has built</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                28. She ..... go to school yesterday.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg39" >&nbsp;<span><b>A.</b></span>&nbsp;<span>must</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg39" >&nbsp;<span><b>B.</b></span>&nbsp;<span>had to</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg39" >&nbsp;<span><b>C.</b></span>&nbsp;<span>ought to</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg39">&nbsp;<span><b>D.</b></span>&nbsp;<span>should have</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                29. That's the ..... of my worries, it'll never happen.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg40" >&nbsp;<span><b>A.</b></span>&nbsp;<span>fewer</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg40" >&nbsp;<span><b>B.</b></span>&nbsp;<span>less</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg40" >&nbsp;<span><b>C.</b></span>&nbsp;<span>last</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg40">&nbsp;<span><b>D.</b></span>&nbsp;<span>least</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                30. Don't ..... me. I'll be back late.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg41" >&nbsp;<span><b>A.</b></span>&nbsp;<span>hope for</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg41" >&nbsp;<span><b>B.</b></span>&nbsp;<span>waiting for</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg41" >&nbsp;<span><b>C.</b></span>&nbsp;<span>expect</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg41">&nbsp;<span><b>D.</b></span>&nbsp;<span>wait for</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                31. The lady ..... in the corner is my aunt.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg42" >&nbsp;<span><b>A.</b></span>&nbsp;<span>whose</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg42" >&nbsp;<span><b>B.</b></span>&nbsp;<span>is sitting</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg42" >&nbsp;<span><b>C.</b></span>&nbsp;<span>sits</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg42">&nbsp;<span><b>D.</b></span>&nbsp;<span>sitting</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                32.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg45" >&nbsp;<span><b>A.</b></span>&nbsp;<span>He used to play chess very often</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg45" >&nbsp;<span><b>B.</b></span>&nbsp;<span>He uses play chess very often</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg45" >&nbsp;<span><b>C.</b></span>&nbsp;<span>He was played chess very often</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg45">&nbsp;<span><b>D.</b></span>&nbsp;<span>He didn't playing chess very often</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                33. He doesn't like ..... what to do.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg46" >&nbsp;<span><b>A.</b></span>&nbsp;<span>told</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg46" >&nbsp;<span><b>B.</b></span>&nbsp;<span>said</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg46" >&nbsp;<span><b>C.</b></span>&nbsp;<span>having said</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg46">&nbsp;<span><b>D.</b></span>&nbsp;<span>being told</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                34. I ..... it doesn't rain tomorrow, I'm going for a picnic.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg47" >&nbsp;<span><b>A.</b></span>&nbsp;<span>wait</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg47" >&nbsp;<span><b>B.</b></span>&nbsp;<span>expect</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg47" >&nbsp;<span><b>C.</b></span>&nbsp;<span>hope</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg47">&nbsp;<span><b>D.</b></span>&nbsp;<span>wish</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                35. I thought you .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg48" >&nbsp;<span><b>A.</b></span>&nbsp;<span>will come to the party</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg48" >&nbsp;<span><b>B.</b></span>&nbsp;<span>were coming to the party</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg48" >&nbsp;<span><b>C.</b></span>&nbsp;<span>come to the party</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg48">&nbsp;<span><b>D.</b></span>&nbsp;<span>have come to the party</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                36. He remembers being ..... to the fair as a child.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg49" >&nbsp;<span><b>A.</b></span>&nbsp;<span>visited</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg49" >&nbsp;<span><b>B.</b></span>&nbsp;<span>brought</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg49" >&nbsp;<span><b>C.</b></span>&nbsp;<span>taken</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg49">&nbsp;<span><b>D.</b></span>&nbsp;<span>shown</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                37. Finishing a course is always .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg50" >&nbsp;<span><b>A.</b></span>&nbsp;<span>satisfying</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg50" >&nbsp;<span><b>B.</b></span>&nbsp;<span>satisfaction</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg50" >&nbsp;<span><b>C.</b></span>&nbsp;<span>satisfies</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg50">&nbsp;<span><b>D.</b></span>&nbsp;<span>satisfied</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                38. She worked hard yesterday and ..... finish everything.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg51" >&nbsp;<span><b>A.</b></span>&nbsp;<span>can</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg51" >&nbsp;<span><b>B.</b></span>&nbsp;<span>was able to</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg51" >&nbsp;<span><b>C.</b></span>&nbsp;<span>is hard</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg51">&nbsp;<span><b>D.</b></span>&nbsp;<span>let</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                39.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg54" >&nbsp;<span><b>A.</b></span>&nbsp;<span>Ask her when will be ready the food</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg54" >&nbsp;<span><b>B.</b></span>&nbsp;<span>Ask her when the food will be ready</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg54" >&nbsp;<span><b>C.</b></span>&nbsp;<span>Ask her when will the food ready be</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg54">&nbsp;<span><b>D.</b></span>&nbsp;<span>Ask her when will be the food ready</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                40.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg56" >&nbsp;<span><b>A.</b></span>&nbsp;<span>That's a little beige British proud bulldog</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg56" >&nbsp;<span><b>B.</b></span>&nbsp;<span>That's a proud beige little British bulldog</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg56" >&nbsp;<span><b>C.</b></span>&nbsp;<span>That's a little proud beige British bulldog</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg56">&nbsp;<span><b>D.</b></span>&nbsp;<span>That's a proud little beige British bulldog</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                41. I wish I ..... a car, I'm tired of catching the bus.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg57" >&nbsp;<span><b>A.</b></span>&nbsp;<span>have</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg57" >&nbsp;<span><b>B.</b></span>&nbsp;<span>had</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg57" >&nbsp;<span><b>C.</b></span>&nbsp;<span>would have</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg57">&nbsp;<span><b>D.</b></span>&nbsp;<span>had had</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                42. Peter can eat ..... as twenty oranges in one sitting.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg59" >&nbsp;<span><b>A.</b></span>&nbsp;<span>so many</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg59" >&nbsp;<span><b>B.</b></span>&nbsp;<span>so much</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg59" >&nbsp;<span><b>C.</b></span>&nbsp;<span>as many</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg59">&nbsp;<span><b>D.</b></span>&nbsp;<span>as much</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                43. I know he didn't thank you, but he .... have done so.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg60" >&nbsp;<span><b>A.</b></span>&nbsp;<span>should</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg60" >&nbsp;<span><b>B.</b></span>&nbsp;<span>may</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg60" >&nbsp;<span><b>C.</b></span>&nbsp;<span>must</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg60">&nbsp;<span><b>D.</b></span>&nbsp;<span>would</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                44. I won't go to the cinema ..... you come with me.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg61" >&nbsp;<span><b>A.</b></span>&nbsp;<span>except</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg61" >&nbsp;<span><b>B.</b></span>&nbsp;<span>otherwise</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg61" >&nbsp;<span><b>C.</b></span>&nbsp;<span>unless</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg61">&nbsp;<span><b>D.</b></span>&nbsp;<span>therefore</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                45. He wrote the letter ..... , he didn't need anybody's help.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg62" >&nbsp;<span><b>A.</b></span>&nbsp;<span>on his own</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg62" >&nbsp;<span><b>B.</b></span>&nbsp;<span>by his own</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg62" >&nbsp;<span><b>C.</b></span>&nbsp;<span>on himself</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg62">&nbsp;<span><b>D.</b></span>&nbsp;<span>by his ownership</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                46. Hotel rooms must be ..... by noon.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg63" >&nbsp;<span><b>A.</b></span>&nbsp;<span>vacated</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg63" >&nbsp;<span><b>B.</b></span>&nbsp;<span>evacuated</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg63" >&nbsp;<span><b>C.</b></span>&nbsp;<span>abandoned</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg63">&nbsp;<span><b>D.</b></span>&nbsp;<span>leave</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                47. You can take the book with you ..... you give it back.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg64" >&nbsp;<span><b>A.</b></span>&nbsp;<span>as well as</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg64" >&nbsp;<span><b>B.</b></span>&nbsp;<span>as time as</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg64" >&nbsp;<span><b>C.</b></span>&nbsp;<span>as far as</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg64">&nbsp;<span><b>D.</b></span>&nbsp;<span>as long as</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                48. Let's go watch the game, .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg65" >&nbsp;<span><b>A.</b></span>&nbsp;<span>will we?</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg65" >&nbsp;<span><b>B.</b></span>&nbsp;<span>shall we?</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg65" >&nbsp;<span><b>C.</b></span>&nbsp;<span>let us?</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg65">&nbsp;<span><b>D.</b></span>&nbsp;<span>don't we?</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                49. I need to finish this ..... Friday.
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg66" >&nbsp;<span><b>A.</b></span>&nbsp;<span>during</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg66" >&nbsp;<span><b>B.</b></span>&nbsp;<span>by</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg66" >&nbsp;<span><b>C.</b></span>&nbsp;<span>until</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg66">&nbsp;<span><b>D.</b></span>&nbsp;<span>at</span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+
+
+
+
+
+                <tr>
+                    <td colspan="2">
+
+                            <b>
+                                50. After many years of research, they found the solution .....
+                            </b>
+                       </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg67" >&nbsp;<span><b>A.</b></span>&nbsp;<span>at the end</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg67" >&nbsp;<span><b>B.</b></span>&nbsp;<span>at last</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" class="answers" name="preg67" >&nbsp;<span><b>C.</b></span>&nbsp;<span>by the end</span>
+                    </td>
+
+                    <td>
+                        <input type="radio" class="answers" name="preg67">&nbsp;<span><b>D.</b></span>&nbsp;<span>on the end</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="hz-line" colspan="2">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td  colspan="2" style="text-align: center;">
+                        <button id="get-result" style="border-radius: 10px;border: 1px solid black; width: 80px;height: 40px;background-color: #353434;color: whitesmoke;" onclick="getResult();">Result</button>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+            </center>
+
+
+    </div>
+
+    <div class="footer">
+        <p class="ft1">
+
+            © 2018 RAMIC All rights reserved
+        </p>
+        <p class="ft2">
+            Conact us: sangwoouz@naver.com
+        </p>
+        <p class="ft3">
+            Created by student of Catholic University of Korea
+        </p>
+        <p class="ft4">
+            Note: Any other use of the materials on this Website<br /> reproduction for purposes, distribution, republication, and display or<br /> performed without any permissions is strictly prohibited.
+            <br />
+            The author is currently researching on this website.
+        </p>
+
+
+    </div>
+    <!-- фиксировать вверний меню -->
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("menu-bar");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+#login-box{
+
+    position: relative;
+
+    display: none;
+    z-index: 99;
+    margin: 0;
+    padding: 0;
+
+}
+@keyframes show {
+    from{
+        opacity: 0;
+        margin-right: -200px;
+    }
+    to{
+        opacity: 1%;
+        margin-right: 0;
+    }
+
+}
+@keyframes hide {
+    from{
+        opacity: 1%;
+        margin-right: 0;
+    }
+    to{
+        opacity: 0%;
+        margin-right: -200px;
+    }
+
+}
+#login-box textarea{
+    padding-top: 10px;
+    font-family: sans-serif;
+    width: 155px;
+    height: 22px;
+    resize: none;
+    border-radius: 5px;
+}
+#login-box input{
+    border-radius: 5px;
+    width: 150px;
+    height: 25px;
+    padding: 4px;
+    margin: 3px;
+}
+
+#login-box table{
+    position: absolute;
+    margin: 0;
+    padding-top: 10px;
+    width: 20%;
+    background-color: #353434;
+    right: 0;
+    height: 0;
+    text-align: center;
+    animation: linear show 300ms;
+
+}
+
+
+#signin-box{
+    position: relative;
+    display: none;
+    z-index: 99;
+    margin: 0;
+    padding: 0;
+
+}
+#signin-box table{
+    position: absolute;
+    width: 20%;
+    height:100%;
+    background-color: #353434;
+    text-align: center;
+    right: 0;
+    margin: 0;
+    padding-top: 10px;
+    transition: linear 1s;
+
+}
+#signin-box input {
+     border-radius: 5px;
+    height: 20px;
+    padding: 4px;
+    margin: 3px;
+}
+.click-label {
+    color: whitesmoke;
+    text-decoration: underline;
+
+}
+.click-label:hover {
+    cursor: pointer;
+}
+.user-mode {
+    margin-left: 20px;
+
+}
+.user-mode label {
+    text-decoration: none;
+
+}

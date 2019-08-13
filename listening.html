@@ -1,0 +1,816 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <!-- <link rel="stylesheet" type="text/css" href="scripts/jquery/jquery.mobile-1.4.5.min.css">
+    <script type="text/javascript" src="scripts/jquery/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery/jquery.mobile-1.4.5.min.js"></script>
+    -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet"> <!-- font-family: 'Noto Sans', sans-serif; -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum" rel="stylesheet"> <!--font-family: 'Forum', cursive;-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> <!--font-family: 'Ubuntu', sans-serif;-->
+
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"> <!--font-family: 'Julius Sans One', sans-serif;-->
+
+
+    <script type="text/javascript" src="scripts/login.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/listening.css">
+    <link rel="stylesheet" type="text/css" href="css/menuNavigation.css">
+    <script>
+        function expand(index) {
+
+            var element = document.getElementsByClassName("collapsible")[index];
+            //alert(element[0].);
+            if(element.style.display=="block"){
+                element.style.display="none";
+            }
+            else element.style.display="block";
+
+        }
+    </script>
+</head>
+<body>
+<header id="menu-bar">
+    <div class="navigation-bar">
+
+        <div class="efl" > <a href="index.html">e f l </a> </div>
+        <div id="administrator-mode"> </div>
+        <script>
+            if(typeof (Storage)!="undefined"){
+                if(localStorage.getItem("userMode")=="A"){
+                    var printMode=document.getElementById("administrator-mode");
+
+
+                    printMode.innerHTML="Administrator mode";
+                }
+            }
+        </script>
+        <nav>
+            <ul>
+
+                <li><a href="test_level.html" > check my english level</a></li>
+                <li><a href="listening.html" >listening </a></li>
+                <li><a href="ted.html"> ted</a></li>
+                <li><a href="quiz.html"> quiz</a></li>
+                <li> <script>
+                    if(localStorage.getItem("loginUser")===null){
+                        document.write("<a href='' onclick='errorLogin();'> open chat </a></li>");
+
+                    }
+                    else{
+                        document.write("<a href='schedule.html'> open chat </a></li>");
+                    }
+                </script></li>
+                <li>
+                    <script>
+                        if(localStorage.getItem("loginUser")===null){
+                            document.write("<a href='' onclick='errorLogin();'> calendar </a></li>");
+
+                        }
+                        else{
+                            document.write("<a href='schedule.html'> calendar </a></li>");
+                        }
+                    </script>
+                <li><a href="about.html">about</a></li>
+                <li>
+                    <script>
+                        if(typeof (Storage)!=="undefined"){
+                            if(localStorage.getItem("loginUser")!=null){
+                                document.write('<a href="#" id="login-li" onclick="logOut();"  > logout </a></li>');
+                            }
+                            else{
+                                document.write('<a href="#" id="login-li" onmouseover="showLoginWindow();"  > login </a></li>');
+                            }
+                        }
+                    </script>
+
+                <li>  </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div id="login-box" onmouseleave="hideLoginWindow();">
+    <table id="login-table">
+        <form id="login-form" action="javascript:submitLogin();">
+            <tr>
+                <td>
+                    <textarea id="id" placeholder="Name" maxlength="8"></textarea>
+                    <!-- <input type="text" id="id" placeholder="Name" >-->
+                </td>
+                <td rowspan="2">
+                    <input type="submit" style="width:40px; height:70% ;margin-right: 20px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password" placeholder="Password">
+            </td></tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showSigninWindow();"> Sign In</label><span style="color: #dedede"> &nbsp; &darr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+<div id="signin-box" onmouseleave="leaveSigninWindow();">
+    <table id="signin-table">
+        <form id="signin-form" action="javascript:submitSignin();">
+            <tr>
+                <td>
+                    <input type="text" id="id-sign" placeholder="Name" >
+                </td>
+                <td rowspan="3">
+                    <input type="submit" style="width:40px; height:60% ;margin-right: 10px" value="GO" >
+                </td>
+            </tr>
+            <tr><td>
+                <input type="password" id="password-sign" placeholder="Password">
+            </td></tr>
+            <tr><td>
+                <input type="password" id="password2-sign" placeholder="Password">
+            </td></tr>
+            <tr>
+                <td colspan="2" style="text-align: left">
+                    <label><input class="user-mode" id="user-mode" type="radio"  name="user-mode" checked><span style="color: #dedede">User mode </span></label><br>
+                    <label><input class="user-mode" id="admin-mode" type="radio" name="user-mode" ><span style="color: #dedede">Administrator</span></label></td>
+            </tr>
+            <tr><td colspan="2"><br><label class="click-label"  onclick="showLoginWindow();return false;"> Log In </label><span style="color: #dedede"> &nbsp; &uarr;</span></td></tr>
+        </form>
+    </table>
+
+</div>
+
+    <div align="middle" class="top_title">
+        <h1>English Listening</h1>
+          <h3>
+                Listening skills practice
+            </h3>
+             <p> Practise and improve your listening skills for your school studies and your English exams.</p>
+             <br>
+            <br>
+       </div>
+    <div class="body">
+        <!-- первый столбик-->
+        <div class="d1">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/1.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            1. Holidays for Fun
+                        </h2>
+                        <h3>
+                            Megen and Todd talk about Australia Day, Valentine's Day, and White Day.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/1_holidays.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(0);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+
+                                <p id="s1">
+                                <p><strong>Todd</strong>: So what are some fun holidays you celebrate in Australia?
+                                <p><strong>Megen</strong>: Well, we have Australia Day. And it is a public holiday, so on that day we go to the beach, and we do various Australian kind of things. We have barbecues and picnics, and it's a day to wear the flag colors.</p>
+                                <p><strong>Todd</strong>: So it's your patriotic day?</p>
+                                <p><strong>Megen</strong>: Yeah, it is.</p>
+                                <p><strong>Todd</strong>: Like our fourth of July.</p>
+                                <p><strong>Megen</strong>: Yes, yeah, like that. We don't usually have fireworks though.</p>
+                                <p><strong>Todd</strong>: Oh, because of fires?</p>
+                                <p><strong>Megen</strong>: No, I don't know why we don't, but I guess fireworks are popular on the Fourth of July right?</p>
+                                <p><strong>Todd</strong>: They are, although these days they don't do it so much because of fires.</p>
+                                <p><strong>Megen</strong>: Oh, it's summer in July.</p>
+                                <p><strong>Todd</strong>: Right, so it's dangerous. ... Um, what about other holidays like for example Valentine's Day? Do you celebrate Valentine's Day?</p>
+                                <p><strong>Megen</strong>: Yeah, we do.</p>
+                                <p><strong>Todd</strong>: Is it a romantic day?</p>
+                                <p><strong>Megen</strong>: Yeah, so for Valentine's Day, usually you'll go out with your partner for dinner ... usually chocolate and flowers. It's pretty <span class="audionotes">extravagant</span> actually. The flowers are becoming more and more extravagant, and people like to send bunches of flowers to their partners work, and there's decorations and a lot of the products in the store are <span class="audionotes">aimed at</span> Valentine's Day I think.</p>
+                                <p><strong>Todd</strong>: What do you think of Valentine's Day? </p>
+                                <p><strong>Megen</strong>: Well, I didn't want to get caught up in every thing when I was in Australia. I would go out for dinner sometimes, but <span class="audionotes">nothing big</span>.</p>
+                                <p><strong>Todd</strong>: Now in Japan they have two days. They have Valentine's Day and they have White Day. Can you explain that?</p>
+                                <p><strong>Megen</strong>: Yeah, well, I was surprised that is the day when the girls are supposed to give something to the boys.</p>
+                                <p><strong>Todd</strong>: Right, it's <span class="audionotes">reversed</span>.</p>
+                                <p><strong>Megen</strong>: Yeah, because I think in Australia on Valentine's Day, it's very important for boys to give something to girls, but not necessarily as important for girls to give something for boys.</p>
+                                <p><strong>Todd</strong>: So when do boys give something to girls?</p>
+                                <p><strong>Megen</strong>: So that is what White Day is for. So the White Day is the day is the day for the boys to <span class="audionotes">reciprocate</span> the action of giving chocolate or something to their partner, and the students are school as well, they will exchange chocolates or candies that they've made and they will give something back on White Day.</p>
+                                <p><strong>Todd</strong>: Yeah, it's kind of nice how they <span class="audionotes">flip it around</span>. I actually like that it's broken up.</p>
+                                <p><strong>Megen</strong>: It gives you time to think about what to do, maybe.</p>
+                                <p><strong>Todd</strong>: Right, exactly.</p>
+
+                                       
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--второй столбик-->
+        <div class="d2">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/2.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            2. Unplugged
+                        </h2>
+                        <h3>
+                            Paul and Aimee talk about how often they look at digital content and if they can go without it.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/2_unplugged.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(1);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s2">
+                                <p><strong>Aimee</strong>: So Paul, speaking of technology, how long do you think you can go without checking your phone? <p><strong>Paul</strong>: Ah, it’s quite embarrassing, really, if I’m honest, I check it a lot. I really do, like I’m always having to look at Facebook, my emails. I’m looking at the football news online… yeah, I mean ….It’s not something that I’m proud about; but it’s something that, yeah, it’s quite a big part of my life, I think.<p><strong>Aimee</strong>: If you left the house and you had forgotten your phone, would you feel something really missing?<p><strong>Paul</strong>: I did actually I forgot my…I use my iPad a lot, and I forgot my iPad the other day just as I was leaving, and my bus was about to arrive. And I really had the strong like pull to get back for it. But I <span class="audionotes">caught myself</span> and decided that yeah, I can <span class="audionotes">manage without</span> it, you know, for one day.<p><strong>Aimee</strong>: Could you manage?<p><strong>Paul</strong>: Yeah, I did, I didn’t even think about it actually. It was just that you know, that sort of momentary pull where I thought I needed it, and then actually having you know, sort of considered it seriously. It was like, I don’t need it, so yeah, I did find without it I didn’t have to be like hooked up to a life support system or anything. Yeah, it’s amazing really, how it comes to be such a central part in your life. How long do you think you could go without using the internet?<p><strong>Aimee</strong>: Ahh, I check my phone thousands of times a day… To <span class="audionotes">exaggerate</span>, did I say thousands? I check it too much, I think, far too much. If I left my home, I would feel gutted. I would feel like I’m really, really missing something. It would definitely be a big, big pull, I think. I read a lot of things on the internet and I check things and, and yeah. When it’s not there, then I do feel like something is maybe I should be doing something, or missing out on something. And it’s not good - I’m embarrassed it’s not good at all. So I think I need to work on unplugging.<p><strong>Paul</strong>: I’ve heard a lot of people they try to do at least one or two days a week when they don’t use the internet at all. But that sounds like it could be quite a good idea. You know, maybe just you know, <span class="audionotes">unplug</span>.<p><strong>Aimee</strong>: Yeah. Do you think you could?<p><strong>Paul</strong>: I think I could, yeah, I think I could. In fact, I really like hiking and being outdoors, and, I think one of the things I really love about it is that I’m … nobody can contact me, you know? And I’m kinda away from everything. And I really enjoy those moments.<p><strong>Aimee</strong>: Uhm, yeah. I don’t know if I could. I always have to cut down before going <span class="audionotes">cold turkey</span>, I think, I’ve got to <span class="audionotes">cut down</span>. I’m trying to cut down. You know, I mentioned before, I’m trying to get back into reading uhm, just get back into real books instead of screen time. So, yeah, I couldn’t go cold turkey, I think, a couple of days a week. I would need to cut down.<p><strong>Paul</strong>: Yeah, yeah, yeah, I think we should probably yeah, make a <span class="audionotes">concerted effort</span> I think it is probably good for us to try to reduce our, you know, user time.
+                            </div>
+                            
+                        </div>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--третий столбик-->
+        <div class="d3">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/3.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            3. Shopping
+                        </h2>
+                        <h3>
+                            Shona shares her thoughts about shopping and how she buys items.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/3_shopping.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(2);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s3">
+                                <p><strong>Todd:</strong> So, Shona, you talked about shopping today. You bought some food and you bought some furniture. Are you a big shopping fan?</p>
+                                <p><strong>Shona:</strong> Not really to be honest. I'm not one of those people who go shopping every weekend or every weekday, or you know, but to be honest, like if I am around shops, and I do see something that I really like, I don't have much <span class="audionotes">willpower</span>, and I will buy it, which isn't great, but yeah, I have <span class="audionotes">accumulated</span> like a few, you know, things over the years, specifically clothes, which I do enjoy buying.</p>
+                                <p><strong>Todd:</strong> So you like shopping for clothes?</p>
+                                <p><strong>Shona:</strong> I like shopping for clothes but I don't really like shopping for anything else.</p>
+                                <p><strong>Todd: </strong>Now when you buy your clothes, are you saying you usually <span class="audionotes">buy clothes on impulse</span>. You see them and you like them?</p>
+                                <p><strong>Shona: </strong>Yeah, that's true. Yeah, I probably would say that. I'm not like staying at home and looking at catalogues, and I think, &quot;Oh, I want a black t-shirt&quot; and I go out and buy that. I will just be wondering about. Something will <span class="audionotes">catch my eye</span>, and I'll think it looks nice so I might end up buying it.</p>
+                                <p><strong>Todd:</strong> You know, these days, you mentioned a catalogue. These days you can buys stuff on the internet quite easily. Have you ever bought clothes over the internet?</p>
+                                <p><strong>Shona: </strong>Yes, I have actually. Yeah, I've bought a couple of items over the internet which is like lots of fun, because 'Is it going to fit?, Is it going to look nice?' You don't know, so once you get it it's like always a bit exciting, like to see how it actually looks in real life.</p>
+                                <p><strong>Todd:</strong> Did it fit?</p>
+                                <p><strong>Shona:</strong> Yeah. Yeah. Actually there we like two really, like, items that I wear quite  a lot, so.</p>
+                                <p><strong>Todd:</strong> What did you buy?</p>
+                                <p><strong>Shona: </strong>I bought like a pen-striped jacket, like this little jacket thing with all these like different badge things on it, and I also bought like, this nice like blue and red and white stripy dress, which is really nice.</p>
+                                <p><strong>Todd:</strong> Oh, cool. Now when you shop, do you always pay cash or do you pay by credit card, or?</p>
+                                <p><strong>Shona:</strong> I'm more like prefer to pay by cash because then I know how much I'm spending, like if you pay with credit card, or whatever, you don't really, you're not aware of how much money you're actually spending, so I prefer to take cash out and pay with that, so then I have more of a budget.</p>
+                                <p><strong>Todd:</strong> Wow, that's pretty good because you say you're an impulse shopper, so I think credit cards usually people like to use them. They see something, they got to have it.</p>
+                                <p><strong>Shona:</strong> Exactly, which is probably going to <span class="audionotes">lead them into a lot of debt</span> eventually, which I would try to avoid.</p>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--четвёртый столбик-->
+        <div class="d4">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/4.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            4. Free Time
+                        </h2>
+                        <h3>
+                            Naomi, a middle school student from Wales, talks about her free time activities.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/4_free_time.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(3);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s4">
+                                    <strong>Dai:</strong> So, Naomi, so you're from Wales and you're eleven. So what does an eleven-year-old girl do for fun in Wales?
+                                <p><strong>Naomi:</strong> I do music. I play the piano and and the violin.<p><strong>Dai:</strong> How long have you played the piano for?<p><strong>Naomi:</strong> Since I was about eight.<p><strong>Dai:</strong> Eight. And what about the violin?<p><strong>Naomi:</strong> About the same?<p><strong>Dai:</strong> OK, and what kind of level are you at now, then, at the piano?<p><strong>Naomi:</strong> I just passed my grade three.<p><strong>Dai: </strong>Oh, congratulations. So that's grade three of ... what is that?<p><strong>Naomi:</strong> Of ... you have different levels.<p><strong>Dai: </strong>OK. And it starts at grade ...?<p><strong>Naomi:</strong> One. And it gets harder. <p><strong>Dai:</strong> Up till ... what's the highest grade you can get?<p><strong>Naomi:</strong> Eight.<p><strong>Dai:</strong> Oh, grade eight. So, you're a grade three now. So I guess the next one you're gonna do is grade four?<p><strong>Naomi:</strong> Yeah.<p><strong>Dai:</strong> OK, and so what do you have to do? What kind of test is it?<p><strong>Naomi:</strong> You learn three pieces.<p><strong>Dai:</strong> <a href="../../resources/Audios/N0901/928-2-three-pieces-of-music.mp3">Three pieces of music</a>.<p><strong>Naomi:</strong> Yeah. And you have to play them and you have do some singing.<p><strong>Dai:</strong> Oh, really?<p><strong>Naomi:</strong> Yeah. And some ...<p><strong>Dai:</strong> Is that like <a href="../../resources/Audios/N0901/928-3-sight-reading.mp3">sight reading</a>? You look at the script and you have to sing the notes or ... ?<p><strong>Naomi:</strong> No, somebody <span class="audionotes">plays a tune</span> for you and you have to sing it, exactly the same tune that they played, and there's sight reading where you have to look at the page and then play it on the piano.<p><strong>Dai:</strong> Oh, wow. Is that hard?<p><strong>Naomi: </strong>Yeah.<p><strong>Dai:</strong> Yeah. I can imagine. So often ... how much to you practice the piano then?<p><strong>Naomi:</strong> It probably should be <span class="audionotes">once</span> a day, but I normally do it three times a week - about that.<p><strong>Dai:</strong> OK. And you enjoy it then?<p><strong>Naomi:</strong> Yeah.<p><strong>Dai:</strong> OK. Great. And, you play the violin too?<p><strong>Naomi:</strong> Yeah.<p><strong>Dai:</strong> Yeah, is that fun?<p><strong>Naomi:</strong> Sort of. It's not as fun as the piano.<p><strong>Dai:</strong> OK. And do you do any other things in your spare time?<p><strong>Naomi:</strong> I do Guides and swimming.<p><strong>Dai:</strong> Guides?<p><strong>Naomi:</strong> Yeah.<p><strong>Dai:</strong> What's Guides?<p><strong>Naomi:</strong> It's like a group of girls and they do activities and everything and they meet each week to do activities.<p><strong>Dai:</strong> Like what kind of activities do you do?<p><strong>Naomi:</strong> Well, you can go camping sometimes, and you just do activities like sometimes you do sports and outside activities and lots of things.<p><strong>Dai:</strong> Oh, is it like, kind of like the Cub Scouts for the boys?<p><strong>Naomi:</strong> Yes.<p><strong>Dai:</strong> OK, so you have to <span class="audionotes">wear a uniform</span>?<p><strong>Naomi:</strong> Yes.<p><strong>Dai:</strong> OK, can you explain the uniform for me?<p><strong>Naomi:</strong> It's sort of this dark blue and you can either wear jeans or joggers or these trousers.<p><strong>Dai:</strong> <span class="audionotes">Joggers</span>? What are joggers?<p><strong>Naomi:</strong> Trousers that you wear for sports.<p><strong>Dai:</strong> Oh, for like jogging. Oh, OK. well, sounds like you have ... you do a lot of fun things in your spare time.<p><strong>Naomi:</strong> Yeah.<p><strong>Dai:</strong> OK, well, it was very nice to talk to you and good luck with your piano and your violin.<p>
+                                    <strong>Naomi: </strong>Thank you.
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--пятый столбик-->
+        <div class="d5">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/5.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            5. Staying Healthy
+                        </h2>
+                        <h3>
+                            Keren talks about her healthy lifestyle and what she does to stay in shape.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/5_stay_healthy.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(4);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s5">
+                                <p><strong>Todd: </strong>OK, Keren, we're talking about health. And, first of all, do you do anything to <span class="audionotes">stay in shape</span>? Like do you exercise or belong to a gym or anything? </p>
+                                <p><strong>Keren: </strong>At the moment, I don't belong to a gym but I go jogging. Usually I go jogging four times a week, and I always go in the morning because for me it's the best time to exercise because it keeps me awake all day, but at the moment I don't do any other exercise. </p>
+                                
+                                <p><strong>Todd: </strong> Wow, just the running. </p>
+                                <p><strong>Keren: </strong> Just the running. </p>
+                                <p><strong>Todd: </strong>Yeah, well, that's pretty good that you get up and go running in the morning, I have <span class="audionotes">a hard time</span> like running early in the morning. </p>
+                                <p><strong>Keren: </strong> Yeah, I think it's easy in the summer because it's <span class="audionotes">really light</span> and the weather's better but in the winter I find it really difficult and actually the last few weeks I've stopped jogging. </p>
+                                <p><strong>Todd: </strong> It's OK, I'm kind of <span class="audionotes">in the same boat</span>. I'm in the same boat... OK, so let's change the talk to diet. </p>
+                                <p><strong>Keren: </strong>OK. </p>
+                                <p><strong>Todd: </strong> Do you have a healthy diet? </p>
+                                <p><strong>Keren: </strong> Reasonably healthy. I'm <span class="audionotes">semi-vegetarian</span> so I don't eat meat. I only eat fish and I eat lots of fruit and vegetables, but I also like my junk food and usually once a day I eat either potato chips or cake, so yeah, I have a balanced diet. </p>
+                                <p><strong>Todd: </strong> And lastly, do you do anything else to stay healthy? Like for example, do you do yoga or do you meditate or do you get so many hours of sleep night? </p>
+                                <p><strong>Keren: </strong> It would be great if I could get eight hours sleep a night but I don't and I don't do yoga. I actually find walking very relaxing and usually when I'm at home in Britain I walk a lot. </p>
+                                <p><strong>Todd: </strong> OK, thanks a lot Keren. </p>
+                                <p><strong>Keren: </strong>That's OK. </p>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--шестой столбик-->
+        <div class="d6">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/6.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            6. Haircut
+                        </h2>
+                        <h3>
+                            Ruth talk to Akane about her new hairstyle.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/6_haircut.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(5);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s6">
+                                    <strong>Akane:</strong> Hi, Ruth.</font>
+                                <p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Hi</font>.<p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Hey did you get a new hair cut?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Yeah I did actually.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Wow, it looks really nice!</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Oh you like it? Thanks.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> It’s shorter than before.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Yeah, it’s quite a lot shorter actually.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> So where did you get it cut?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth: </strong>Oh it’s quite an interesting story. I went to a hairdresser just down the road. I saw a sign outside and it said that they were offering cheap haircuts so I went in there.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Oh, ok well, how cheap was it?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Erm, well it was 1500 yen which is about £7.50.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Oh right, ok. So are you pleased with your new haircut?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth: </strong>Erm, yeah, I am pleased. I’m pleased that it’s shorter and it’s better than it would have been if I had done it myself and I’m also pleased that it was cheap, but its not exactly what I was looking for.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Oh, so, would you go there again?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Erm, probably not!</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> No? Well, what kind of person cut your hair?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Oh it was quite interesting. Erm, it was really, it was quite a dirty hairdressers really.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Oh no, dirty!</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Well it was kind of a bit greasy and everybody in there…well, it was full of old men and I was the only girl in there.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane: </strong>Oh, ok</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth: </strong>And the haircut took probably 7 minutes.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Wow, that’s really fast!</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Yeah, exactly and they didn’t wash my hair or anything, so…</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Oh no!</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> But it was cheap and you know I like bargains so it wasn’t too bad.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> So there were a lot of old men there and no women?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth: </strong>That’s right.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> So was it a barber?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> I hope not! I hope I didn’t make the mistake of going into a barber but there was a woman in there cutting hair and she cut my hair</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Oh that’s a good sign.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Yeah that was a good sign.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> So do you think your haircut will last until you have to go back to England?</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Well I’m hoping so. It is quite short; it’s a lot shorter than it was before so hopefully it will.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Akane:</strong> Ok, well I really like it.</font><p><font face="Arial, Helvetica, sans-serif"><strong>Ruth:</strong> Oh that’s really nice of you, thanks! Well, if you get your haircut don’t go there!</font><p>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--седбмой столбик-->
+        <div class="d7">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/7.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            7. The Boyfriend
+                        </h2>
+                        <h3>
+                            Tara talks about her boyfriend and what it is about him that she likes.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/7_boyfriend.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(6);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s7">
+                                    <strong>Todd:</strong> OK, Tara, why don't you tell us about your <span class="audiodef">first boyfriend</span>?
+                                <p><strong>Tara: </strong>OK, my first boyfriend, I met in my hometown. He's called Barry. He's my first real boyfriend. Yeah, I met him at a bar. Yeah, I had a bit of a <span class="audiodef">crush</span> on him when I was younger and then, yeah, we met a club one night and it <span class="audiodef">carried on</span> from there.<p><strong>Todd:</strong> Oh, that's nice. So what was it about Barry that attracted him to you?<p><strong>Tara: </strong>He's very good looking. He's tall and he had a beard. I like beard.<p><strong>Todd:</strong> Beards, really!<p><strong>Tara: </strong>I like beards. I don't know why.<p><strong>Todd:</strong> Short beard or long beard?<p><strong>Tara:</strong> No, no short. I just like <span class="audiodef">stubble</span>.<p><strong>Todd:</strong> OK. Are you still in contact with him?<p>
+                                    <strong>Tara: </strong>Yeah, yeah, yeah. At the moment he's traveling. He's in India but, we're so young, so we often like, separate to go traveling , and then get back together again, because I'm only 24 and he's twenty five, and we have a <span class="audiodef">serious relationship</span> but, we don't wanna, you know, stop doing our own things in life.
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--восьмой столбик-->
+        <div class="d8">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/8.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            8. Twins
+                        </h2>
+                        <h3>
+                            Nicola has a twin brother. She talks about him and their similarities and differences.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/8_twins.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(7);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s8">
+                                <p>
+                                    OK, my twin brother. Well, my twin brother is called Daniel, and he is four minutes younger than me. We were both born on the 5th of January, and I think that we kind of look a like except that he's a lot taller than me and he has very dark hair but we have the same eyes and nose and smile, at least that's what people say. Um, I wouldn't say we are especially close, mm, not really, maybe when we were younger but we weren't always in the same classes at school because my parents wanted us to be a bit more different. Um, we used to be dressed when we were babies the same, me in pink and him in blue, and we used to have a birthday cake that was always, half was pink and half was blue, and mine had ballet slippers on it and his a football or a rugby ball, but I guess we are quite different personalities. He's really, really outgoing, and just very different from me. At school I was always in the top classes getting A's and he was always failing in the bottom classes, but he was really sporty and I wasn't so people said we were very different. <br />
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!--девятый столбик-->
+        <div class="d9">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/9.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            9. The right age
+                        </h2>
+                        <h3>
+                            What is the best age for kids to start doing some things like having a smart phone?
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/9_right_age.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(8);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s9">
+                                <p><strong>Katie</strong>: So I want to ask you about when is the <span class="audionotes">right age</span> to have stuff or to start doing stuff. What do you think is the right age to start having a phone? </p>
+                                <p><strong>Aimee</strong>: Oh, I think for security reasons, to, you know, keep the child safe, perhaps maybe about 11 or 12 when they start going around places without their parents.</p>
+                                <p><strong>Katie</strong>: Yeah. </p>
+                                <p><strong>Aimee</strong>: It would be a way for me to contact my daughter. Even now, my daughter is only six and she doesn't have a phone, and that's far too young, I believe. However, she walks to school by herself and walks home by herself. And that <span class="audionotes">stresses me out</span> for her safety. </p>
+                                <p>So there are times where I wish I could phone her or text her, but she doesn't have a phone. And I do believe that six is far too young to have a phone. </p>
+                                <p><strong>Katie</strong>: A little bit too young. </p>
+                                <p><strong>Aimee</strong>: Yes. So <span class="audionotes">purely</span> for <span class="audionotes">security reasons</span>, I think probably around 11 or 12. </p>
+                                <p><strong>Katie</strong>: How old were you when you first got your phone. </p>
+                                <p><strong>Aimee</strong>: Well, I'm an old person so, you know, people didn't have mobile phones. I was reaching the end of high school. I was, I think, 17 when I got my first mobile phone. And it was a big brick. But again, that was for, you know, I guess security reasons. </p>
+                                <p><strong>Katie</strong>: Yeah. </p>
+                                <p><strong>Aimee</strong>: My parents got it for me. I was going out, you know, I started going out at night, going to concerts. And I was beginning to be allowed going into bars and things at 17, 18. So yeah, it was a good security thing. My parents were appreciative of being able to contact me. </p>
+                                <p><strong>Katie</strong>: Yeah. </p>
+                                <p><strong>Aimee</strong>: How about you? How old were you when you first got your mobile phone? </p>
+                                <p><strong>Katie</strong>: Oh goodness. I was about 12 or 13. I was really young. </p>
+                                <p><strong>Aimee</strong>: Okay. </p>
+                                <p><strong>Katie</strong>: And I only got my first mobile phone or my first cellphone because my best friend who got the same one and I wanted to send like picture messages to her. It was <span class="audionotes">back in the old days</span> where you can send a photo, you can take photos. </p>
+                                <p><strong>Aimee</strong>: Picture messages. </p>
+                                <p><strong>Katie</strong>: Picture messages. </p>
+                                <p><strong>Aimee</strong>: I couldn't even send picture messages. Mine was just texts, like pressing the same button over and over again. </p>
+                                <p><strong>Katie</strong>: Oh yeah. Oh yeah. So I never really used it as like a way of security. I just used it to send really <span class="audionotes">overpriced</span> picture messages to my friend for absolutely no reason. It was such a waste. And to play Snake. Do you remember Snake?</p>
+                                <p><strong>Aimee</strong>: Oh yeah, Snake. </p>
+                                <p><strong>Katie</strong>: Like the little game that you could play on your phone.</p>
+                                <p><strong>Aimee</strong>: Yup, yup. </p>
+                                <p><strong>Katie</strong>: Yeah. I didn't use it for a good use, I think. I just used it to waste time.</p>
+                                <p><strong>Aimee</strong>: Fair enough. Well, you're 12, you said, right? </p>
+                                <p><strong>Katie</strong>: Twelve, thirteen, yeah. </p>
+                                <p><strong>Aimee</strong>: That sounds age appropriate, I think, age appropriate use.</p>
+                                <p><strong>Katie</strong>: Yeah. It's a good time to start wasting your time. </p>
+                                <p><strong>Aimee</strong>: Yeah. </p>
+                                <p><strong>Katie</strong>: Get ahead to start wasting time. </p>
+                                <p><strong>Aimee</strong>: Yeah.                                      </p>
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- десьятый столбик-->
+        <div class="d10">
+            <table>
+
+                <tr>
+                    <td rowspan="2">
+                        <img src="resources/images/10.jpg" width="200" height="150" />
+                    </td>
+                    <td>
+                        <h2>
+                            10. Favorite food
+                        </h2>
+                        <h3>
+                            Todd and Aimee talk about their favorite things.
+                        </h3>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td>
+                        <div class="input_audio">
+                            <audio controls>
+                                <source src="resources/audios/10_favorite_food.mp3" />
+                            </audio>
+                        </div>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div data-role="main" class="ui-content">
+                            <div class="expand-container"  onclick="expand(9);"><div class="image-box"><h3>Script</h3></div> </div>
+                            <div class="collapsible">
+                            <p id="s10">
+                                <p><strong>Todd</strong>: Hey Aimee, how are you today?</p>
+                                <p><strong>Aimee</strong>: I'm good, thanks Todd. And you?</p>
+                                <p><strong>Todd</strong>: I'm good. Pretty good. Let's talk about your favorite things.</p>
+                                <p><strong>Aimee</strong>: OK.</p>
+                                <p><strong>Todd</strong>: What is your favorite food?</p>
+                                <p><strong>Aimee</strong>: Ooh! My favorite food is avocado. </p>
+                                <p><strong>Todd</strong>: Avocado?</p>
+                                <p><strong>Aimee</strong>: <span class="audionotes">Honestly</span>.</p>
+                                <p><strong>Todd</strong>: Wow!</p>
+                                <p><strong>Aimee</strong>: How about you?</p>
+                                <p><strong>Todd</strong>: My favorite food is pizza, I think. I love pizza.</p>
+                                <p><strong>Aimee</strong>: Oh, me too!</p>
+                                <p><strong>Todd</strong>: It's so good.</p>
+                                <p><strong>Aimee</strong>: It's so delicious. </p>
+                                <p><strong>Todd</strong>: Yeah.</p>
+                                <p><strong>Aimee</strong>: And what is your favorite movie?</p>
+                                <p><strong>Todd</strong>: Well, my favorite movie is Star Wars.</p>
+                                <p><strong>Aimee</strong>: <span class="audionotes">Classic</span>!</p>
+                                <p><strong>Todd</strong>: I know. And you? What is your favorite movie?</p>
+                                <p><strong>Aimee</strong>: Well, I do love Star Wars too, but my favorite movie Ferris Beuller's Day Off.</p>
+                                <p><strong>Todd</strong>: Ooh! I like that movie a lot. Very good. Very good. So I was in high school the same time as the movie</p>
+                                <p><strong>Aimee</strong>: Were you?</p>
+                                <p><strong>Todd</strong>: <span class="audionotes">Yeah</span>!</p>
+                                <p><strong>Aimee</strong>: Great!</p>
+                                <p><strong>Todd</strong>: So cool. Who is your favorite actor?</p>
+                                <p><strong>Aimee</strong>: My favorite actor is Jean Reno.</p>
+                                <p><strong>Todd</strong>: Hmm, the Frenchmen. </p>
+                                <p><strong>Aimee</strong>: Yes. Yes, he's French, but he's been in a lot of American movies too.</p>
+                                <p><strong>Todd</strong>: Yeah, I like the movie Leon.</p>
+                                <p><strong>Aimee</strong>: Love it!</p>
+                                <p><strong>Todd</strong>: It's very cool.</p>
+                                <p><strong>Aimee</strong>: Yes, I agree. How about you?</p>
+                                <p><strong>Todd</strong>: My favorite actor is Brad Pitt, so I like Brad Pitt a lot.</p>
+                                <p><strong>Aimee</strong>: He's great. </p>
+                                <p><strong>Todd</strong>: Yeah, he is good.</p>
+                                <p><strong>Aimee</strong>: Very talented. </p>
+                                <p><strong>Todd</strong>: Ah, who ... I'm sorry ... what is your favorite season?</p>
+                                <p><strong>Aimee</strong>: My favorite season is probably Spring. I think. It's ... the cool of winter has passed and it's not too hot yet, so I think Spring. How about you? What's your favorite season?</p>
+                                <p><strong>Todd</strong>: Oh, my favorite season is the Fall or Autumn. I love the Fall. I love the colors. It is not hot. It is not cold, and they are many holidays, and my birthday is in the Fall.</p>
+                                <p><strong>Aimee</strong>: They are great reasons to love Autumn.</p>
+                                <p><strong>Todd</strong>: So, when is your birthday?</p>
+                                <p><strong>Aimee</strong>: Actually, my birthday is also in Autumn. My birthday is in October.</p>
+                                <p><strong>Todd</strong>: Oh, wow! Me too. My birthday is also in October. What day?</p>
+                                <p><strong>Aimee</strong>: 14th!</p>
+                                <p><strong>Todd:</strong> 14th!</p>
+                                <p><strong>Aimee</strong>: And you?</p>
+                                <p><strong>Todd</strong>: The second. Cool! So next year let's have a birthday party together.</p>
+                                <p><strong>Aimee</strong>: OK.</p>
+                                <p><strong>Todd</strong>: October birthday party.</p>
+                                <p><strong>Aimee</strong>: <span class="audionotes">Good idea</span>.</p>
+                                <p><strong>Todd</strong>: So what is your favorite city?</p>
+                                <p><strong>Aimee</strong>: My favorite city is probably Osaka.</p>
+                                <p><strong>Todd</strong>: Oh, in Japan.</p>
+                                <p><strong>Aimee</strong>: Yes, yes. So far. Yes, Osaka is very noisy and colorful and the people are very open and talkative, so I really enjoy Osaka.</p>
+                                <p><strong>Todd</strong>: <span class="audionotes">Nice</span>.</p>
+                                <p><strong>Aimee</strong>: How about you? What's your favorite city?</p>
+                                <p><strong>Todd</strong>: I think my favorite city is Barcelona.</p>
+                                <p><strong>Aimee</strong>: Ooh, in Spain.</p>
+                                <p><strong>Todd</strong>: Yeah, it's very nice.</p>
+                                <p><strong>Aimee</strong>: It is.</p>
+                                <p><strong>Todd</strong>: It's warm. It's beautiful. The food is delicious.</p>
+                                <p><strong>Aimee</strong>: Yes.</p>
+                                <p><strong>Todd</strong>: People are nice.</p>
+                                <p><strong>Aimee</strong>: Yes.</p>
+                                <p><strong>Todd:</strong> But it's expensive. </p>
+                                <p><strong>Aimee</strong>: <span class="audionotes">Right</span>.</p>
+                                <p><strong>Todd</strong>: A little bit.</p>
+                                <p><strong>Aimee</strong>: Yeah.</p>
+                                <p><strong>Todd</strong>: But Osaka is expensive.</p>
+                                <p><strong>Aimee</strong>: <span class="audionotes">That's true</span>.</p>
+                                <p><strong>Todd</strong>: Very expensive.</p>
+                                <p><strong>Aimee</strong>: Yeah.</p>
+                                <p><strong>Todd</strong>: OK, thanks.</p>
+                                <p><strong>Aimee</strong>: Thanks, Todd.</p>
+                                <p><strong>Todd</strong>: Bye.</p>
+                                <p><strong>Aimee</strong>: Bye.</p>
+                                
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            
+        </div>
+    
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="footer">
+        <p class="ft1">
+
+            © 2018 RAMIC All rights reserved
+        </p>
+        <p class="ft2">
+            Conact us: sangwoouz@naver.com
+        </p>
+        <p class="ft3">
+            Created by student of Catholic University of Korea
+        </p>
+        <p class="ft4">
+            Note: Any other use of the materials on this Website<br /> reproduction for purposes, distribution, republication, and display or<br /> performed without any permissions is strictly prohibited.
+            <br />
+            The author is currently researching on this website.
+        </p>
+
+
+    </div>
+
+
+
+
+
+    <!-- фиксировать вверний меню -->
+    <script>
+        window.onscroll = function () { myFunction() };
+
+        var header = document.getElementById("menu-bar");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>

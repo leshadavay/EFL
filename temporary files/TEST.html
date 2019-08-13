@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function go() {
+            var id=document.getElementById("print");
+            var p="<table>";
+
+            for(var i=0;i<10;i++){
+                p+="<tr><td>i</td><td>fdfs</td></tr> ";
+            }
+            p+="</table>";
+            id.innerHTML=p;
+        }
+    </script>
+    <style>
+        table tr td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="print"></div>
+    <script>
+        go();
+    </script>
+<table>
+    <tr><td>1asd</td><td>sadas</td></tr>
+    <tr><td>2asd</td><td>fsdfds</td></tr>
+</table>
+</body>
+</html>

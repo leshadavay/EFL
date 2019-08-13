@@ -1,0 +1,167 @@
+#test-section{
+    width: 100%;
+    height:600px;
+    background-image: url("../resources/images/bk1.jpg") ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    text-align: center;
+
+}
+#listening-section{
+    width: 100%;
+    height:500px;
+    background-image: url("../resources/images/bk222.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+
+    text-align: center;
+
+}
+#ted-section{
+    width: 100%;
+    height:500px;
+    background-image: url("../resources/images/bk3.jpg");
+    background-repeat: no-repeat;
+
+    background-size: 100% 100%;
+    text-align: center;
+
+}
+#quiz-section{
+    width: 100%;
+    height:400px;
+    background-image: url("../resources/images/bk43.jpg");
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-attachment: fixed;
+    text-align: center;
+}
+#livechat-section{
+    width: 100%;
+    height:500px;
+    background-image: url("../resources/images/bk51.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    text-align: center;
+
+}
+#calendar-section{
+    width: 100%;
+    height:400px;
+    background-image: url("../resources/images/bk62.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    text-align: center;
+}
+#ted-section .description{
+    margin-left: 50%;
+    font-size:0.8em;
+    padding-top: 0.5%;
+    padding-bottom:  0.5%;
+    background-color: rgba(0,0,0,0.7);
+    border-bottom-left-radius: 30px;
+    border-top-left-radius: 30px;
+    margin-top: -15px;
+    color: ghostwhite;
+}
+
+.h3 {
+    font-family: 'Julius Sans One', sans-serif;
+    text-align: center;
+    font-size: 3.5em;
+
+}
+#test-section .h3{
+    padding-top: 90px;
+}
+#quiz-section .h3,#calendar-section .h3{
+
+    padding-top: 35px;
+
+}
+#listening-section .h3{
+
+    padding-top: 25px;
+
+}
+#ted-section .h3{
+
+    padding-left:33%;
+}
+#livechat-section .h3{
+
+    padding-top: 30px;
+
+    padding-right:55%;
+}
+
+#main-article a{
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Malgun Gothic';
+    color: whitesmoke;
+    font-size: 1.7em;
+
+}
+#main-article p{
+    font-family: 'Forum';
+    font-size: 2em;
+    padding-left:12%;
+    padding-right:12%;
+}
+#listening-section p{
+    padding-left:12%;
+    padding-right:12%;
+    color: #dddddd;
+}
+#quiz-section p{
+    color: #dddddd;
+    padding-left:12%;
+    padding-right:12%;
+}
+#livechat-section p{
+    margin-right: 50%;
+    margin-left: -5%;
+    margin-top: -30px;
+    font-size: 1.5em;
+}
+#calendar-section p{
+    color: #dddddd;
+}
+.a-div-button{
+    width: 130px;
+    height:40px;
+    text-decoration: none;
+    border: 3px solid black;
+
+    border-radius: 30px;
+    background-color: rgba(0,0,0,.6);
+
+}
+#ted-section .a-div-button{
+    position: relative;
+    left: 13em;
+    margin-top: 10px;
+}
+#livechat-section .a-div-button{
+    position: relative;
+    right:10em;
+    margin-top: 10px;
+}
+#quiz-section .transparent{
+    margin-top: -40px;
+    height:180px;
+    background-color: rgba(0,0,0,.7);
+    margin-bottom: 20px;
+    padding-top: 5px;
+}
+#calendar-section .transparent{
+    margin-top: -40px;
+    height:180px;
+    background-color: rgba(0,0,0,.7);
+    margin-bottom: 20px;
+    padding-top: 5px;
+}

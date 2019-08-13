@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/menuNavigation.css">
+    <link rel="stylesheet" type="text/css" href="../css/slidePage.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Forum" rel="stylesheet"> <!--font-family: 'Forum', cursive;-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> <!--font-family: 'Ubuntu', sans-serif;-->
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet"> <!--font-family: 'Julius Sans One', sans-serif;-->
+
+    <style>
+        body,html{
+            margin: 0 auto;
+        }
+        #test-section{
+            width: 100%;
+            height:600px;
+            background-image: url("../resources/images/bk1.jpg") ;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            text-align: center;
+
+        }
+        #listening-section{
+            width: 100%;
+            height:500px;
+            background-image: url("../resources/images/bk222.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+
+            text-align: center;
+            color: floralwhite;
+        }
+        #ted-section{
+            width: 100%;
+            height:500px;
+            background-image: url("../resources/images/bk3.jpg");
+            background-repeat: no-repeat;
+
+            background-size: 100% 100%;
+            text-align: center;
+
+        }
+        #quiz-section{
+            width: 100%;
+            height:400px;
+            background-image: url("../resources/images/bk43.jpg");
+            background-repeat: repeat-x;
+            background-size: contain;
+            background-attachment: fixed;
+            text-align: center;
+        }
+        #livechat-section{
+            width: 100%;
+            height:500px;
+            background-image: url("../resources/images/bk51.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            text-align: center;
+        }
+        #calendar-section{
+            width: 100%;
+            height:400px;
+            background-image: url("../resources/images/bk62.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            text-align: center;
+        }
+        #ted-section .description{
+            margin-left: 50%;
+            padding-left: 5%;
+            padding-right: 2%;
+            padding-top: 0.5%;
+            padding-bottom:  0.5%;
+            background-color: rgba(0,0,0,0.7);
+            border-bottom-left-radius: 30px;
+            border-top-left-radius: 30px;
+            margin-top: -15px;
+            color: ghostwhite;
+        }
+
+        .h3 {
+            font-family: 'Julius Sans One', sans-serif;
+            text-align: center;
+            font-size: 3.5em;
+
+        }
+        #test-section .h3{
+            padding-top: 90px;
+        }
+        #quiz-section .h3,#calendar-section .h3{
+
+            padding-top: 35px;
+
+        }
+        #listening-section .h3{
+
+            padding-top: 25px;
+
+        }
+        #ted-section .h3{
+
+            padding-left:33%;
+        }
+        #livechat-section .h3{
+
+            padding-top: 30px;
+
+            padding-right:60%;
+        }
+
+        #main-article a{
+            display: inline-block;
+            text-decoration: none;
+            font-family: 'Malgun Gothic';
+            color: whitesmoke;
+            font-size: 1.7em;
+
+        }
+        #main-article p{
+            font-family: 'Forum';
+            font-size: 2em;
+        }
+        #quiz-section p{
+            color: #dddddd;
+        }
+        #livechat-section p{
+            margin-right: 60%;
+            margin-top: -30px;
+        }
+        #calendar-section p{
+            color: #dddddd;
+        }
+       .a-div-button{
+           width: 130px;
+           height:40px;
+           text-decoration: none;
+           border: 3px solid black;
+
+            border-radius: 30px;
+           background-color: rgba(0,0,0,.6);
+
+        }
+       #ted-section .a-div-button{
+           position: relative;
+           left: 13em;
+            margin-top: 10px;
+       }
+        #livechat-section .a-div-button{
+            position: relative;
+            right:15em;
+            margin-top: 10px;
+        }
+        #quiz-section .transparent{
+            margin-top: -40px;
+            height:180px;
+            background-color: rgba(0,0,0,.7);
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+        #calendar-section .transparent{
+            margin-top: -40px;
+            height:180px;
+            background-color: rgba(0,0,0,.7);
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+    </style>
+    <script>
+        if(typeof(Storage)!=="undefined") {
+
+            currentDate = new Date();
+            currentYear = currentDate.getFullYear();
+            currentMonth = currentDate.getMonth();
+            tDay=currentDate.getDate(); //todays day
+            tMonth=currentDate.getMonth();
+            tYear=currentDate.getFullYear();
+
+            localStorage.setItem("tDay", tDay.toString());
+            localStorage.setItem("tMonth", tMonth.toString());
+            localStorage.setItem("tYear", tYear.toString());
+            localStorage.setItem("currentMonth", currentMonth.toString());
+            localStorage.setItem("currentYear", currentYear.toString());
+
+            if(localStorage.getItem("isEvent")===null)
+                localStorage.setItem("isEvent","no");
+        }
+    </script>
+</head>
+<body>
+    <div id="top-animation">
+        <h1>animation</h1>
+    </div>
+    <header>
+        <div class="navigation-bar">
+            <div class="efl" > <a href="#">e f l </a> </div>
+            <nav>
+             <ul>
+
+                <li><a href="#" > check my english level</a></li>
+                <li><a href="#" >listening </a></li>
+                <li><a href="#"> ted</a></li>
+                <li><a href="#"> quiz</a></li>
+                <li><a href="#" >open chat </a></li>
+                <li><a href="../schedule.html" target="_blank"> calendar </a></li>
+                <li><a href="#"> login </a></li>
+                <li>  </li>
+        </ul>
+        </nav>
+        </div>
+    </header>
+    <!-- page slider -->
+    <div id="slide-page-container">
+
+        <input type="radio" id="img-rad1" name="images"  checked/>
+        <input type="radio" id="img-rad2" name="images"/>
+        <input type="radio" id="img-rad3" name="images" />
+        <input type="radio" id="img-rad4" name="images" />
+
+
+        <div class="slide-images" id="slide-page1">
+            <img src="../resources/images/1.jpg" alt="slide page1">
+            <label for="img-rad4" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad2" class="next"><span>&#x203a;</span></label>
+        </div>
+        <div class="slide-images" id="slide-page2">
+            <img src="../resources/images/2.jpg" alt="slide page2">
+            <label for="img-rad1" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad3" class="next"><span>&#x203a;</span></label>
+        </div>
+        <div class="slide-images" id="slide-page3">
+            <img src="../resources/images/3.jpg" alt="slide page3">
+            <label for="img-rad2" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad4" class="next"><span>&#x203a;</span></label>
+
+        </div>
+        <div class="slide-images" id="slide-page4">
+            <img src="../resources/images/4.jpg" alt="slide page4">
+            <label for="img-rad3" class="previous"><span>&#x2039;</span></label>
+            <label for="img-rad1" class="next"><span>&#x203a;</span></label>
+        </div>
+
+        <!-- making bottom dots -->
+        <div id="slide-navigation">
+            <label for="img-rad1" class="dots" id="dot1" ></label>
+            <label for="img-rad2" class="dots" id="dot2" ></label>
+            <label for="img-rad3" class="dots" id="dot3" ></label>
+            <label for="img-rad4" class="dots" id="dot4" ></label>
+
+        </div>
+    </div>
+
+    <section>
+    <article>
+        <div id="main-article">
+        <div id="test-section">
+            <h3 class="h3">Check my English level</h3>
+            <p>What is your level of English ?<br>Let's check your current English level!<br>
+                This test contains grammar and vocabulary questions<br> and your test result will help
+            you choose <br>a level to practise at. </p>
+            <a href="#" ><div id="go-page-test" class="a-div-button" >GO</div> </a>
+        </div>
+        <hr>
+        <div id="listening-section">
+            <h3 class="h3">Listening</h3>
+            <p> Listening to as much English as you can will help you<br>
+                to improve your level of understanding and
+                you'll also improve <br>your speaking and pronunciation.
+                Whether you need to improve your <br>English listening skills for work,
+                for studying or to be able to communicate<br> effectively with friends,
+                you'll find practical listening <br>lessons and activities to help you.<br><br></p>
+            <a href="#" ><div id="go-page-listening" class="a-div-button" >GO</div> </a>
+        </div>
+        <hr>
+        <div id="ted-section">
+            <h3 class="h3">Most popular TED talks</h3>
+            <div class="description">
+            <p>Learn English with TED Talks is a supplemental resource for
+                students enrolled in English language learning programs.
+                This video-based language learning app helps learners understand
+                and discuss powerful ideas from TED Talks. Check out 10 of TED's most viewed talks.
+            </p>
+            </div>
+            <a   href="#" ><div id="go-page-ted" class="a-div-button" >GO</div> </a>
+        </div>
+        <hr>
+        <div id="quiz-section">
+            <h3 class="h3">Quiz</h3>
+            <div class="transparent">
+            <p>By completing "sentence completion" exercises you will enhance your understanding of
+                English grammar, improve your vocabulary. As you progress through each section,
+                these exercises gradually increase in difficulty.
+            </p>
+            </div>
+            <a   href="#" ><div id="go-page-quiz" class="a-div-button" >GO</div> </a>
+        </div>
+            <hr>
+        <div id="livechat-section">
+            <h3 class="h3">Live chat</h3>
+            <div class="transparent">
+                <p>By completing 'sentence completion' exercises you will enhance your understanding of
+                    English grammar, improve your vocabulary. As you progress through each section,
+                    these exercises gradually increase in difficulty.
+                </p>
+            </div>
+            <a  href="#" ><div id="go-page-livechat" class="a-div-button" >GO</div> </a>
+        </div>
+            <hr>
+        <div id="calendar-section">
+            <h3 class="h3">My schedule</h3>
+            <div class="transparent">
+                <p>By completing 'sentence completion' exercises you will enhance your understanding of
+                    English grammar, improve your vocabulary. As you progress through each section,
+                    these exercises gradually increase in difficulty.
+                </p>
+            </div>
+            <a  href="#" ><div id="go-page-schedule" class="a-div-button" >GO</div> </a>
+        </div>
+        </div>
+    </article>
+    </section>
+
+    <aside></aside>
+    <footer>
+
+    </footer>
+</body>
+</html>
